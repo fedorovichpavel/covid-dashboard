@@ -1,20 +1,17 @@
 const requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
+  method: 'GET',
+  redirect: 'follow',
 };
-getApifunc();
-
 
 export function getApifunc() {
-    fetch("https://api.covid19api.com/summary", requestOptions)
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem('summaryApi', JSON.stringify(data));
-        })
-        .catch(error => console.log('error', error));
+  fetch('https://api.covid19api.com/summary', requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      localStorage.setItem('summaryApi', JSON.stringify(data));
+    })
+    .catch(() => new Error());
 
-    return JSON.parse(localStorage.getItem('summaryApi'));
+  return JSON.parse(localStorage.getItem('summaryApi'));
 }
-
-
+getApifunc();
 setTimeout(getApifunc, 10000);
