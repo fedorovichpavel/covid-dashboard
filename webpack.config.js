@@ -22,7 +22,7 @@ module.exports = (env, options) => {
 
         module: {
             rules: [{
-                    test: /\.css$/,
+                    test: /\.css$/i,
                     use: [{
                             loader: MiniCssExtractPlugin.loader,
                             options: {
@@ -48,19 +48,23 @@ module.exports = (env, options) => {
 
         plugins: [
             new CleanWebpackPlugin(),
-            /*   new CopyWebpackPlugin({
-                   patterns: [{
-                           from: path.resolve(__dirname, 'src/assets/audio'),
-                           to: path.resolve(__dirname, 'dist/src/assets/audio'),
-                       },
-                        {
-                            from: path.resolve(__dirname, 'src/assets/img'),
-                            to: path.resolve(__dirname, 'dist/src/assets'),
-                        }  
-                   ],
-               }),  */
+            new CopyWebpackPlugin({
+                patterns: [
+                    /*{
+                                               from: path.resolve(__dirname, 'src/assets/audio'),
+                                               to: path.resolve(__dirname, 'dist/src/assets/audio'),
+                                           }, */
+                    {
+                        from: path.resolve(__dirname, 'src/assets/img'),
+                        to: path.resolve(__dirname, 'dist/src/assets/img'),
+                    }, {
+                        from: './src/assets/img/favicon.ico',
+                        to: '.dist/src/assets/img',
+                    }
+                ],
+            }),
             new MiniCssExtractPlugin({
-                filename: 'style.css'
+                filename: './src/style.css'
             }),
             new HtmlWebpackPlugin({
                 template: 'index.html'
