@@ -1,0 +1,31 @@
+{
+    "name": "covid-dashboard",
+    "version": "1.0.0",
+    "description": "covid-dashboard",
+    "main": "index.js",
+    "scripts": {
+        "dev": "webpack --mode development",
+        "build": "webpack --mode production",
+        "start": "webpack serve --mode development"
+    },
+    "author": "Pavel Fedorovich, Maryna Migacheva, Mikalai-Hurinovich",
+    "license": "ISC",
+    "devDependencies": {
+        "clean-webpack-plugin": "^3.0.0",
+        "copy-webpack-plugin": "^6.4.1",
+        "css-loader": "^5.0.1",
+        "eslint": "^7.15.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "file-loader": "^6.2.0",
+        "html-webpack-plugin": "^4.5.0",
+        "mini-css-extract-plugin": "^1.3.3",
+        "sass-loader": "^10.1.0",
+        "webpack": "^5.10.3",
+        "webpack-cli": "^4.2.0",
+        "webpack-dev-server": "^3.11.0"
+    },
+    "dependencies": {
+        "babel-loader": "^8.2.2",
+        "style-loader": "^2.0.0"
+    }
+}
