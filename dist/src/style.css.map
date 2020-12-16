@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://covid-dashboard/./src/style.css"],"names":[],"mappings":"AAAA;IACI,SAAS;IACT,UAAU;AACd;;AAEA;IACI,WAAW;IACX,aAAa;AACjB,C","file":"./src/style.css","sourcesContent":["* {\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n#map {\r\n    width: 100%;\r\n    height: 100vh;\r\n}"],"sourceRoot":""}
