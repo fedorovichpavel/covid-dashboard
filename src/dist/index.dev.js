@@ -1,5 +1,3 @@
-"use strict";
+require('./assets/js/map');
 
-require("./assets/js/map");
-
-require("./style.css");
+require('./style.css');
