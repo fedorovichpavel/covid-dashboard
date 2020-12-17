@@ -5,3 +5,5 @@ import './normalize.css';
 import './style.css';
 
 import './assets/js/country-codes';
+import './assets/js/countries';
+import './assets/js/script';

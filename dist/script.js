@@ -270,6 +270,226 @@ function addToDOM() {
 
 /***/ }),
 
+/***/ "./src/assets/js/countries.js":
+/*!************************************!*\
+  !*** ./src/assets/js/countries.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "country_list": () => /* binding */ country_list
+/* harmony export */ });
+
+let country_list = [
+	{ name: 'USA', code: 'US' },
+	{ name: 'Spain', code: 'ES' },
+	{ name: 'Italy', code: 'IT' },
+	{ name: 'France', code: 'FR' },
+	{ name: 'Germany', code: 'DE' },
+	{ name: 'UK', code: 'GB' },
+	{ name: 'Turkey', code: 'TR' },
+	{ name: 'Iran', code: 'IR' },
+	{ name: 'Russia', code: 'RU' },
+	{ name: 'Belgium', code: 'BE' },
+	{ name: 'Brazil', code: 'BR' },
+	{ name: 'Canada', code: 'CA' },
+	{ name: 'Netherlands', code: 'NL' },
+	{ name: 'Switzerland', code: 'CH' },
+	{ name: 'Portugal', code: 'PT' },
+	{ name: 'India', code: 'IN' },
+	{ name: 'Ireland', code: 'IE' },
+	{ name: 'Austria', code: 'AT' },
+	{ name: 'Peru', code: 'PE' },
+	{ name: 'Sweden', code: 'SE' },
+	{ name: 'Japan', code: 'JP' },
+	{ name: 'S. Korea', code: 'KR' },
+	{ name: 'Chile', code: 'CL' },
+	{ name: 'Saudi Arabia', code: 'SA' },
+	{ name: 'Poland', code: 'PL' },
+	{ name: 'Ecuador', code: 'EC' },
+	{ name: 'Romania', code: 'RO' },
+	{ name: 'Pakistan', code: 'PK' },
+	{ name: 'Mexico', code: 'MX' },
+	{ name: 'Denmark', code: 'DK' },
+	{ name: 'Norway', code: 'NO' },
+	{ name: 'UAE', code: 'AE' },
+	{ name: 'Czechia', code: 'CZ' },
+	{ name: 'Australia', code: 'AU' },
+	{ name: 'Singapore', code: 'SG' },
+	{ name: 'Indonesia', code: 'ID' },
+	{ name: 'Serbia', code: 'RS' },
+	{ name: 'Philippines', code: 'PH' },
+	{ name: 'Ukraine', code: 'UA' },
+	{ name: 'Qatar', code: 'QA' },
+	{ name: 'Malaysia', code: 'MY' },
+	{ name: 'Belarus', code: 'BY' },
+	{ name: 'Dominican Republic', code: 'DO' },
+	{ name: 'Panama', code: 'PA' },
+	{ name: 'Finland', code: 'FI' },
+	{ name: 'Colombia', code: 'CO' },
+	{ name: 'Luxembourg', code: 'LU' },
+	{ name: 'South Africa', code: 'ZA' },
+	{ name: 'Egypt', code: 'EG' },
+	{ name: 'Argentina', code: 'AR' },
+	{ name: 'Morocco', code: 'MA' },
+	{ name: 'Thailand', code: 'TH' },
+	{ name: 'Algeria', code: 'DZ' },
+	{ name: 'Moldova', code: 'MD' },
+	{ name: 'Bangladesh', code: 'BD' },
+	{ name: 'Greece', code: 'GR' },
+	{ name: 'Hungary', code: 'HU' },
+	{ name: 'Kuwait', code: 'KW' },
+	{ name: 'Bahrain', code: 'BH' },
+	{ name: 'Croatia', code: 'HR' },
+	{ name: 'Iceland', code: 'IS' },
+	{ name: 'Kazakhstan', code: 'KZ' },
+	{ name: 'Uzbekistan', code: 'UZ' },
+	{ name: 'Estonia', code: 'EE' },
+	{ name: 'Iraq', code: 'IQ' },
+	{ name: 'New Zealand', code: 'NZ' },
+	{ name: 'Azerbaijan', code: 'AZ' },
+	{ name: 'Slovenia', code: 'SI' },
+	{ name: 'Lithuania', code: 'LT' },
+	{ name: 'Armenia', code: 'AM' },
+	{ name: 'Bosnia and Herzegovina', code: 'BA' },
+	{ name: 'Oman', code: 'OM' },
+	{ name: 'North Macedonia', code: 'MK' },
+	{ name: 'Slovakia', code: 'SK' },
+	{ name: 'Cuba', code: 'CU' },
+	{ name: 'Hong Kong', code: 'HK' },
+	{ name: 'Cameroon', code: 'CM' },
+	{ name: 'Afghanistan', code: 'AF' },
+	{ name: 'Bulgaria', code: 'BG' },
+	{ name: 'Tunisia', code: 'TN' },
+	{ name: 'Ghana', code: 'GH' },
+	{ name: 'Ivory Coast', code: 'CI' },
+	{ name: 'Cyprus', code: 'CY' },
+	{ name: 'Djibouti', code: 'DJ' },
+	{ name: 'Latvia', code: 'LV' },
+	{ name: 'Andorra', code: 'AD' },
+	{ name: 'Lebanon', code: 'LB' },
+	{ name: 'Costa Rica', code: 'CR' },
+	{ name: 'Niger', code: 'NE' },
+	{ name: 'Burkina Faso', code: 'BF' },
+	{ name: 'Albania', code: 'AL' },
+	{ name: 'Kyrgyzstan', code: 'KG' },
+	{ name: 'Nigeria', code: 'NG' },
+	{ name: 'Bolivia', code: 'BO' },
+	{ name: 'Guinea', code: 'GN' },
+	{ name: 'Uruguay', code: 'UY' },
+	{ name: 'Honduras', code: 'HN' },
+	{ name: 'San Marino', code: 'SM' },
+	{ name: 'Palestine', code: 'PS' },
+	{ name: 'Malta', code: 'MT' },
+	{ name: 'Taiwan', code: 'TW' },
+	{ name: 'Jordan', code: 'JO' },
+	{ name: 'Réunion', code: 'RE' },
+	{ name: 'Georgia', code: 'GE' },
+	{ name: 'Senegal', code: 'SN' },
+	{ name: 'Mauritius', code: 'MU' },
+	{ name: 'DRC', code: 'CD' },
+	{ name: 'Montenegro', code: 'ME' },
+	{ name: 'Isle of Man', code: 'IM' },
+	{ name: 'Sri Lanka', code: 'LK' },
+	{ name: 'Mayotte', code: 'YT' },
+	{ name: 'Kenya', code: 'KE' },
+	{ name: 'Vietnam', code: 'VN' },
+	{ name: 'Guatemala', code: 'GT' },
+	{ name: 'Venezuela', code: 'VE' },
+	{ name: 'Mali', code: 'ML' },
+	{ name: 'Paraguay', code: 'PY' },
+	{ name: 'El Salvador', code: 'SV' },
+	{ name: 'Jamaica', code: 'JM' },
+	{ name: 'Tanzania', code: 'TZ' },
+	{ name: 'Martinique', code: 'MQ' },
+	{ name: 'Guadeloupe', code: 'GP' },
+	{ name: 'Rwanda', code: 'RW' },
+	{ name: 'Congo', code: 'CG' },
+	{ name: 'Brunei', code: 'BN' },
+	{ name: 'Somalia', code: 'SO' },
+	{ name: 'Gibraltar', code: 'GI' },
+	{ name: 'Cambodia', code: 'KH' },
+	{ name: 'Madagascar', code: 'MG' },
+	{ name: 'Trinidad and Tobago', code: 'TT' },
+	{ name: 'Gabon', code: 'GA' },
+	{ name: 'Myanmar', code: 'MM' },
+	{ name: 'Ethiopia', code: 'ET' },
+	{ name: 'Aruba', code: 'AW' },
+	{ name: 'French Guiana', code: 'GF' },
+	{ name: 'Monaco', code: 'MC' },
+	{ name: 'Bermuda', code: 'BM' },
+	{ name: 'Togo', code: 'TG' },
+	{ name: 'Liechtenstein', code: 'LI' },
+	{ name: 'Equatorial Guinea', code: 'GQ' },
+	{ name: 'Liberia', code: 'LR' },
+	{ name: 'Barbados', code: 'BB' },
+	{ name: 'Sudan', code: 'SD' },
+	{ name: 'Guyana', code: 'GY' },
+	{ name: 'Zambia', code: 'ZM' },
+	{ name: 'Cabo Verde', code: 'CV' },
+	{ name: 'Cayman Islands', code: 'KY' },
+	{ name: 'Bahamas', code: 'BS' },
+	{ name: 'French Polynesia', code: 'PF' },
+	{ name: 'Uganda', code: 'UG' },
+	{ name: 'Maldives', code: 'MV' },
+	{ name: 'Libya', code: 'LY' },
+	{ name: 'Guinea-Bissau', code: 'GW' },
+	{ name: 'Macao', code: 'MO' },
+	{ name: 'Haiti', code: 'HT' },
+	{ name: 'Syria', code: 'SY' },
+	{ name: 'Eritrea', code: 'ER' },
+	{ name: 'Mozambique', code: 'MZ' },
+	{ name: 'Saint Martin', code: 'MF' },
+	{ name: 'Benin', code: 'BJ' },
+	{ name: 'Chad', code: 'TD' },
+	{ name: 'Mongolia', code: 'MN' },
+	{ name: 'Nepal', code: 'NP' },
+	{ name: 'Sierra Leone', code: 'SL' },
+	{ name: 'Zimbabwe', code: 'ZW' },
+	{ name: 'Angola', code: 'AO' },
+	{ name: 'Antigua and Barbuda', code: 'AG' },
+	{ name: 'Eswatini', code: 'SZ' },
+	{ name: 'Botswana', code: 'BW' },
+	{ name: 'Timor-Leste', code: 'TL' },
+	{ name: 'Belize', code: 'BZ' },
+	{ name: 'New Caledonia', code: 'NC' },
+	{ name: 'Malawi', code: 'MW' },
+	{ name: 'Fiji', code: 'FJ' },
+	{ name: 'Dominica', code: 'DM' },
+	{ name: 'Namibia', code: 'NA' },
+	{ name: 'Saint Lucia', code: 'LC' },
+	{ name: 'Grenada', code: 'GD' },
+	{ name: 'Saint Kitts and Nevis', code: 'KN' },
+	{ name: 'CAR', code: 'CF' },
+	{ name: 'St. Vincent Grenadines', code: 'VC' },
+	{ name: 'Turks and Caicos', code: 'TC' },
+	{ name: 'Falkland Islands', code: 'FK' },
+	{ name: 'Greenland', code: 'GL' },
+	{ name: 'Montserrat', code: 'MS' },
+	{ name: 'Seychelles', code: 'SC' },
+	{ name: 'Suriname', code: 'SR' },
+	{ name: 'Nicaragua', code: 'NI' },
+	{ name: 'Gambia', code: 'GM' },
+	{ name: 'Vatican City', code: 'VA' },
+	{ name: 'Mauritania', code: 'MR' },
+	{ name: 'Papua New Guinea', code: 'PG' },
+	{ name: 'St. Barth', code: 'BL' },
+	{ name: 'Burundi', code: 'BI' },
+	{ name: 'Bhutan', code: 'BT' },
+	{ name: 'Caribbean Netherlands', code: 'BQ' },
+	{ name: 'British Virgin Islands', code: 'VG' },
+	{ name: 'Sao Tome and Principe', code: 'ST' },
+	{ name: 'South Sudan', code: 'SD' },
+	{ name: 'Anguilla', code: 'AI' },
+	{ name: 'Saint Pierre Miquelon', code: 'PM' },
+	{ name: 'Yemen', code: 'YE' },
+	{ name: 'China', code: 'CN' }
+];
+
+/***/ }),
+
 /***/ "./src/assets/js/country-codes.js":
 /*!****************************************!*\
   !*** ./src/assets/js/country-codes.js ***!
@@ -2372,6 +2592,276 @@ fetch('https://api.covid19api.com/summary', requestOptions)
 
 /***/ }),
 
+/***/ "./src/assets/js/script.js":
+/*!*********************************!*\
+  !*** ./src/assets/js/script.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _countries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./countries */ "./src/assets/js/countries.js");
+
+
+const searchCountry = document.querySelector('.pick__country')
+const nameOfCountry = document.querySelector('.name')
+const countryList = document.querySelector('.country-list')
+const hideList = document.querySelector('.close')
+const input = document.getElementById('search__country')
+
+
+function showAllCountries() {
+	const numberOfCountries = _countries__WEBPACK_IMPORTED_MODULE_0__.country_list.length;
+
+	let i = 0,
+		changeUlListId;
+
+	_countries__WEBPACK_IMPORTED_MODULE_0__.country_list.forEach((country, index) => {
+		if (index % Math.ceil(numberOfCountries / listsNumber) == 0) {
+			changeUlListId = `list-${i}`;
+			countryList.innerHTML += `<ul id='${changeUlListId}'></ul>`;
+			i++;
+		}
+		document.getElementById(`${changeUlListId}`).innerHTML += `
+		<li onclick='fetchDataCountries("${country.name}")' id="${country.name}">
+		${country.name}
+		</li>
+
+		`
+	})
+};
+let listsNumber = 3;
+showAllCountries();
+
+hideList.addEventListener('click', () => {
+	searchCountry.classList.add('hide');
+});
+nameOfCountry.addEventListener('click', () => {
+	input.value = '';
+	resetCountryList();
+	searchCountry.classList.toggle('hide');
+	searchCountry.classList.add('fadeIn');
+	input.focus();
+});
+countryList.addEventListener('click', () => {
+	searchCountry.classList.toggle('hide');
+});
+
+input.addEventListener('input', () => {
+	let value = input.value.toUpperCase();
+
+	_countries__WEBPACK_IMPORTED_MODULE_0__.country_list.forEach(country => {
+		if (country.name.toUpperCase().startsWith(value)) {
+			document.getElementById(country.name).classList.remove('hide');
+		} else {
+			document.getElementById(country.name).classList.add('hide');
+		}
+	})
+})
+
+const resetCountryList = () => {
+	_countries__WEBPACK_IMPORTED_MODULE_0__.country_list.forEach(country => {
+		document.getElementById(country.name).classList.remove('hide');
+	})
+}
+
+// Work with api
+const nameOFCountry = document.querySelector(".country .name");
+const totalCasesValue = document.querySelector(".total__cases .value");
+const newCasesValue = document.querySelector(".total__cases .new-value");
+const recoveredValue = document.querySelector(".recovered .value");
+const newRecoveredValue = document.querySelector(".recovered .new-value");
+const deathsValue = document.querySelector(".deaths .value");
+const newDeathsValue = document.querySelector(".deaths .new-value");
+
+const ctx = document.getElementById("chart").getContext("2d");
+
+let globalDataArr = [],
+	casesArr = [],
+	recoveredArr = [],
+	deathsArr = [],
+	deaths = [],
+	dates = [],
+	datesArr = [];
+
+let codeOfCountry = geoplugin_countryCode(),
+	yourCountry;
+_countries__WEBPACK_IMPORTED_MODULE_0__.country_list.forEach(country => {
+	if (country.code === codeOfCountry) {
+		yourCountry = country.name;
+	}
+})
+
+
+function fetchDataCountries(country) {
+	yourCountry = country;
+	nameOFCountry.innerHTML = "Loading...";
+
+	(casesArr = []),
+		(recoveredArr = []),
+		(deathsArr = []),
+		(dates = []),
+		(datesArr = []);
+
+	let requestVariation = {
+		method: "GET",
+		redirect: "follow",
+	};
+
+	const fetchApi = async (country) => {
+		await fetch(
+			`https://api.covid19api.com/total/country/${country}/status/confirmed`,
+			requestVariation
+		)
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+				data.forEach((item) => {
+					dates.push(item.Date);
+					casesArr.push(item.Cases);
+				});
+			});
+
+		await fetch(
+			`https://api.covid19api.com/total/country/${country}/status/recovered`,
+			requestVariation
+		)
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+
+				data.forEach((item) => {
+					recoveredArr.push(item.Cases);
+				});
+			});
+
+		await fetch(
+			`https://api.covid19api.com/total/country/${country}/status/deaths`,
+			requestVariation
+		)
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+				data.forEach((item) => {
+					deathsArr.push(item.Cases);
+				});
+			});
+
+		updateStatChart();
+	};
+
+	fetchApi(country);
+}
+
+fetchDataCountries(yourCountry);
+
+// Update Statistics and Chart
+function updateStatChart() {
+	updateStatistics();
+	chartIt();
+}
+
+function updateStatistics() {
+	const totalCases = casesArr[casesArr.length - 1];
+
+	const newCases = totalCases - casesArr[casesArr.length - 2];
+
+	const totalRecovered = recoveredArr[recoveredArr.length - 1];
+	const newRecoveredCases =
+		totalRecovered - recoveredArr[recoveredArr.length - 2];
+
+	const totalDeaths = deathsArr[deathsArr.length - 1];
+	const newDeathsCases = totalDeaths - deathsArr[deathsArr.length - 2];
+
+	nameOFCountry.innerHTML = yourCountry;
+	totalCasesValue.innerHTML = totalCases;
+	newCasesValue.innerHTML = `+${newCases}`;
+	recoveredValue.innerHTML = totalRecovered;
+	newRecoveredValue.innerHTML = `+${newRecoveredCases}`;
+	deathsValue.innerHTML = totalDeaths;
+	newDeathsValue.innerHTML = `+${newDeathsCases}`;
+
+	// format dates
+	dates.forEach((date) => {
+		datesArr.push(formatDate(date));
+	});
+}
+
+// UPDATE CHART
+let chart;
+
+function chartIt() {
+	if (chart) {
+		chart.destroy();
+	}
+
+	chart = new Chart(ctx, {
+		type: "bar",
+		data: {
+			datasets: [{
+				label: "Cases",
+				data: casesArr,
+				fill: false,
+				borderColor: "hsl(288, 97%, 71%)",
+				backgroundColor: "hsl(288, 97%, 71%)",
+				borderWidth: 1,
+			},
+			{
+				label: "Recovered",
+				data: recoveredArr,
+				fill: false,
+				borderColor: "hsl(106, 96%, 35%)",
+				backgroundColor: "hsl(106, 96%, 35%)",
+				borderWidth: 1,
+			},
+			{
+				label: "Deaths",
+				data: deathsArr,
+				fill: false,
+				borderColor: "#8B0000",
+				backgroundColor: "#8B0000",
+				borderWidth: 1,
+			},
+			],
+			labels: datesArr,
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+		},
+	});
+}
+
+// FORMAT DATES
+const allMonths = [
+	"Jan",
+	"Feb",
+	"Mar",
+	"Apr",
+	"May",
+	"Jun",
+	"Aug",
+	"Sep",
+	"Oct",
+	"Nov",
+	"Dec",
+	"Jan"
+];
+
+function formatDate(dateString) {
+	let date = new Date(dateString);
+	let month = date.getMonth();
+	console.log(date.getMonth());
+
+
+	return `${date.getDate()} ${allMonths[month]}`;
+}
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -2388,6 +2878,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _normalize_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./normalize.css */ "./src/normalize.css");
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
 /* harmony import */ var _assets_js_country_codes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./assets/js/country-codes */ "./src/assets/js/country-codes.js");
+/* harmony import */ var _assets_js_countries__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./assets/js/countries */ "./src/assets/js/countries.js");
+/* harmony import */ var _assets_js_script__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./assets/js/script */ "./src/assets/js/script.js");
+
+
 
 
 
