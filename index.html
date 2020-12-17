@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
+
   <meta charset="utf-8">
   <title>Covid Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,16 @@
   <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
   <link rel="shortcut icon" href="./src/assets/img/favicon.ico" type="image/x-icon">
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
-
-
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+  
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+  
+   <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 </head>
+
 <body>
+
 <div class="wrap">
   <!-- HEADER -->
   <header>
@@ -94,6 +97,49 @@
       <li> - 2020 - </li>
     </ul>
   </footer>
-</div>
+   <!--Nik Block-->
+  <main>
+        <div class="statistics">
+            <div class="last__report">
+                <div class="country">
+                    <div class="name">Loading...</div>
+                    <div class="find__country">(find)</div>
+                    <div class="pick__country hide">
+                        <div class="search">
+                            <input type="text" id="search__country" placeholder="Search For Country...">
+                            <img class="close" src="src/assets/img/close.svg" alt="closeImg">
+                        </div>
+                        <div class="country-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="total__cases">
+                    <div class="title">Total Cases</div>
+                    <div class="value">0</div>
+                    <div class="new-value">+0</div>
+                </div>
+                <div class="recovered">
+                    <div class="title">Recovered</div>
+                    <div class="value">0</div>
+                    <div class="new-value">+0</div>
+                </div>
+                <div class="deaths">
+                    <div class="title">Deaths</div>
+                    <div class="value">0</div>
+                    <div class="new-value">+0</div>
+                </div>
+            </div>
+            <canvas id="chart"></canvas>
+        </div>
+    </main>
+
+
+    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+  <!--end Nik Blok-->
+  
+  
+</div> 
+   <script src="src/assets/js/countries.js"></script>
+    <script src="src/assets/js/script.js"></script>
 </body>
 </html>
