@@ -126,10 +126,6 @@ header {
     margin: 0 auto;
 }
 
-main {
-    margin: 0 auto;
-}
-
 .statistics {
     background: linear-gradient(rgb(149, 66, 66), #fb5e5e);
     width: 100%;
@@ -137,22 +133,25 @@ main {
 
 .last__report {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    width: 80%;
+    width: 100%;
     color: #fff;
     padding: 20px;
 }
 
 .country {
+    display: flex;
+    justify-content: space-evenly;
     height: 80px;
     cursor: pointer;
-    max-width: 300px;
+    width: 100%;
 }
 
 .name {
-    font-size: 3em;
+    font-size: 2em;
     color: hsl(288, 97%, 71%);
 }
 
@@ -177,42 +176,38 @@ main {
 }
 
 .total__cases {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     color: hsl(288, 97%, 71%);
-    height: 80px;
     font-weight: 900;
-    margin-bottom: 30px;
 }
 
 .recovered {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     color: hsl(106, 96%, 35%);
-    margin-bottom: 30px;
 }
 
 .deaths {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
     color: black;
-    margin-bottom: 30px;
 }
 
 .title {
-    font-size: 1.7em;
-    margin-bottom: 30px;
+    font-size: 1.5em;
 }
 
 .value {
-    font-size: 2.5em;
+    font-size: 1.5em;
     font-weight: 700;
 }
 
 .new-value {
     font-size: 1.5em;
-}
-
-.recovered {
-    height: 80px;
-}
-
-.deaths {
-    height: 80px;
 }
 
 #chart {

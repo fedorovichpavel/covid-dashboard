@@ -1,23 +1,29 @@
-const _countryCodes = require('./country-codes');
+"use strict";
 
-const mapBox = 'pk.eyJ1IjoiZmVkb3JvdmljaHBhdmVsIiwiYSI6ImNraW5lcTkzMzBtMW8ycm81cTd6N3N3aDIifQ.botvkeUgOwWBdkRdCIwuWg';
+var _countryCodes = require("./country-codes");
+
+var mapBox = 'pk.eyJ1IjoiZmVkb3JvdmljaHBhdmVsIiwiYSI6ImNraW5lcTkzMzBtMW8ycm81cTd6N3N3aDIifQ.botvkeUgOwWBdkRdCIwuWg';
 mapboxgl.accessToken = mapBox;
-const map = new mapboxgl.Map({
+var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/dark-v10',
-  zoom: 1.5,
-  center: [40, 20],
+  zoom: 0.5,
+  center: [50, 20],
+  scroll: false
 });
-const latlongMap = new Map();
+var latlongMap = new Map();
 
-_countryCodes.country_codes.forEach((e) => latlongMap.set(e.country, [e.longitude, e.latitude]));
+_countryCodes.country_codes.forEach(function (e) {
+  return latlongMap.set(e.country, [e.longitude, e.latitude]);
+});
 /* Определение местоположения
 fetch("http://api.ipstack.com/37.215.40.61?access_key=4d45dec0ea3029c6c74945486042836a&format=1", requestOptions)
     .then(response => response.json())
     .then(data => { console.log(data) })
     */
 
-const getMarkColor = function getMarkColor(x) {
+
+var getMarkColor = function getMarkColor(x) {
   if (x <= 100) {
     return '#f6dddd';
   }
@@ -38,26 +44,28 @@ const getMarkColor = function getMarkColor(x) {
 };
 
 window.onload = function _callee() {
-  let data;
-  return regeneratorRuntime.async((_context) => {
+  var data;
+  return regeneratorRuntime.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return regeneratorRuntime.awrap(new Promise((resolve) => setTimeout(resolve, 1000)));
+          return regeneratorRuntime.awrap(new Promise(function (resolve) {
+            return setTimeout(resolve, 1000);
+          }));
 
         case 2:
           data = JSON.parse(localStorage.getItem('summaryApi'));
-          data.Countries.forEach((country) => {
-            const { TotalConfirmed } = country;
-            const { Country } = country;
+          data.Countries.forEach(function (country) {
+            var TotalConfirmed = country.TotalConfirmed,
+                Country = country.Country;
             new mapboxgl.Marker({
-              color: getMarkColor(TotalConfirmed),
+              color: getMarkColor(TotalConfirmed)
             }).setLngLat(latlongMap.get(Country)).addTo(map);
           });
 
         case 4:
-        case 'end':
+        case "end":
           return _context.stop();
       }
     }

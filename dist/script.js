@@ -1,6 +1,19 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/normalize.css":
+/*!***************************!*\
+  !*** ./src/normalize.css ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/style.css":
 /*!***********************!*\
   !*** ./src/style.css ***!
@@ -10,6 +23,249 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/assets/js/app.js":
+/*!******************************!*\
+  !*** ./src/assets/js/app.js ***!
+  \******************************/
+/***/ (() => {
+
+//GLOBAL DATA
+let objDataGlobal = {
+  totalConfirmed: 0,
+  totalRecovered: 0,
+  totalDeaths: 0,
+  newConfirmed: 0,
+  newRecovered: 0,
+  newDeaths: 0,
+  countries: []
+}
+let data;
+
+//get data on page load
+addEventListener('load', getData);
+
+//get new data at 00:00 every day
+let updateData = setInterval(function() {
+  const today = new Date();
+  const hour = today.getHours();
+  const min = today.getMinutes();
+  const sec = today.getSeconds();
+  if(hour === 0 && min === 0 && sec === 0) {getGlobalData(); setGlobalDataToLocal();}
+}, 1000);
+
+//function
+function getData() {
+  // if(localStorage.getItem('totalConfirmed') === undefined || localStorage.getItem('totalConfirmed') === '0') {
+  //   getGlobalData();
+  //   setGlobalDataToLocal();
+  // } else {
+  //   console.log('взято из памяти');
+  //   getDataGlobalFromLocal();
+  // }
+  const today = new Date();
+  const day = today.getDate();
+  const month = today.getMonth() + 1;
+  const year = today.getFullYear();
+
+  const hour = today.getHours();
+  const min = today.getMinutes();
+  const sec = today.getSeconds();
+  if(day < 10) {
+		document.getElementById('dd').innerText = '0' + day;
+  } else document.getElementById('dd').innerText = day;
+  if(month < 10) {
+		document.getElementById('mm').innerText = '0' + month;
+  } else document.getElementById('mm').innerText = month;
+  document.getElementById('yy').innerText = year;
+  if(hour < 10) {
+		document.getElementById('hours').innerText = '0' + hour;
+		} else document.getElementById('hours').innerText = hour;
+	if(min < 10) {
+		document.getElementById('minutes').innerText = '0' + min;
+		} else document.getElementById('minutes').innerText = min;
+
+  getGlobalData();
+  // addToDOM();
+}
+
+async function getGlobalData() {
+  const url = 'https://api.covid19api.com/summary';
+  const res = await fetch(url);
+  data = await res.json();
+  //get data global
+  objDataGlobal.totalConfirmed = data.Global.TotalConfirmed;
+  objDataGlobal.totalRecovered = data.Global.TotalRecovered;
+  objDataGlobal.totalDeaths = data.Global.TotalDeaths;
+  //get data last day
+  objDataGlobal.newConfirmed = data.Global.NewConfirmed;
+  objDataGlobal.newRecovered = data.Global.NewRecovered;
+  objDataGlobal.newDeaths = data.Global.NewDeaths;
+  //get data by country
+  objDataGlobal.countries = data.Countries;
+  addToDOM();
+}
+
+function setGlobalDataToLocal() {
+  //data last day and global
+  const totalConfirmed = objDataGlobal.totalConfirmed;
+  const totalRecovered = objDataGlobal.totalRecovered;
+  const totalDeaths = objDataGlobal.totalDeaths;
+  const newConfirmed = objDataGlobal.newConfirmed;
+  const newRecovered = objDataGlobal.newRecovered;
+  const newDeaths = objDataGlobal.newDeaths;
+  //save in LocalStorage
+	localStorage.setItem('totalConfirmed', totalConfirmed);
+  localStorage.setItem('totalRecovered', totalRecovered);
+  localStorage.setItem('totalDeaths', totalDeaths);
+  localStorage.setItem('newConfirmed', newConfirmed);
+  localStorage.setItem('newRecovered', newRecovered);
+  localStorage.setItem('newDeaths', newDeaths);
+}
+
+function getDataGlobalFromLocal() {
+  //get data global
+  objDataGlobal.totalConfirmed = localStorage.getItem('totalConfirmed');
+  objDataGlobal.totalRecovered = localStorage.getItem('totalRecovered');
+  objDataGlobal.totalDeaths = localStorage.getItem('totalDeaths');
+  //get data last day
+  objDataGlobal.newConfirmed = localStorage.getItem('newConfirmed');
+  objDataGlobal.newRecovered = localStorage.getItem('newRecovered');
+  objDataGlobal.newDeaths = localStorage.getItem('newDeaths');
+}
+
+function addToDOM() {
+  const countPeopleAll = 7827000000;
+  const countPeople = countPeopleAll / 100000;
+  //data global per 100 thousand population
+  const totalConfirmedForPeople = Math.round(objDataGlobal.totalConfirmed / countPeople);
+  const totalRecoveredForPeople = Math.round(objDataGlobal.totalRecovered / countPeople);
+  const totalDeathsForPeople = Math.round(objDataGlobal.totalDeaths / countPeople);
+
+  //data last day per 100 thousand population
+  const newConfirmedForPeople = Math.round(objDataGlobal.newConfirmed / countPeople);
+  const newRecoveredForPeople = Math.round(objDataGlobal.newRecovered / countPeople);
+  const newDeathsForPeople = Math.round(objDataGlobal.newDeaths / countPeople);
+
+  arrData = [
+    [objDataGlobal.totalConfirmed, objDataGlobal.totalRecovered, objDataGlobal.totalDeaths, 'Global data for the world', '(absolute values)'],
+    [objDataGlobal.newConfirmed, objDataGlobal.newRecovered, objDataGlobal.newDeaths, 'Global data for the last day', '(absolute values)'],
+    [totalConfirmedForPeople, totalRecoveredForPeople , totalDeathsForPeople, 'Global data for the world', '(per 100 thousand population)'],
+    [newConfirmedForPeople, newRecoveredForPeople, newDeathsForPeople, 'Global data for the last day', '(per 100 thousand population)']
+  ];
+
+  //add data to DOM
+  let dataCases = document.querySelector('.data-cases p');
+  let dataRecovered = document.querySelector('.data-recovered p');
+  let dataDeaths = document.querySelector('.data-deaths p');
+  let headerWidget = document.querySelector('.global h3');
+  let headerWidgetNote = document.querySelector('.note');
+
+  //value default - global
+  const startIndex = 0;
+  addContentGlobalDate(startIndex);
+
+  //select other global data
+  selectData();
+  function selectData() {
+    let index = 0;
+    const next = document.querySelector('.next');
+    const prev = document.querySelector('.prev');
+    next.addEventListener('click', function() {
+      if(index === 3) {
+        index = 0;
+      } else {
+        index ++;
+      }
+      addContentGlobalDate(index);
+    });
+    prev.addEventListener('click', function() {
+      if(index === 0) {
+        index = 3;
+      } else {
+        index --;
+      }
+      addContentGlobalDate(index);
+    });
+  }
+  function addContentGlobalDate(index) {
+    dataCases.textContent = arrData[index][0].toLocaleString();
+    dataRecovered.textContent = arrData[index][1].toLocaleString();
+    dataDeaths.textContent = arrData[index][2].toLocaleString();
+    headerWidget.textContent = arrData[index][3].toLocaleString();
+    headerWidgetNote.textContent = arrData[index][4].toLocaleString();
+  }
+
+
+  //add list countries
+  let parentCountries = document.querySelector('.countries');
+  const countCountries = objDataGlobal.countries.length;
+  for (let i = 0; i < countCountries; i++) {
+    let itemList = document.createElement('li');
+    itemList.classList.add('item-country');
+    itemList.setAttribute('data-id', i);
+    parentCountries.appendChild(itemList);
+  }
+  let listCountries = document.querySelectorAll('.countries .item-country');
+  listCountries.forEach((item, i) => {
+    // item.setAttribute('data-id', objDataGlobal.countries[i].ID);
+    let arrWork = objDataGlobal.countries;
+    arrWork.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
+    item.textContent = arrWork[i].Country;
+    const countForItem = document.createElement('span');
+    item.appendChild(countForItem);
+    countForItem.textContent = ' - ' + arrWork[i].TotalConfirmed.toLocaleString();
+  });
+
+
+  //get data by country for click
+  parentCountries.addEventListener('click', function(event) {
+    let target = event.target;
+    while(target !== parentCountries) {
+      if(target.tagName === 'LI') {
+          console.log(target);
+          const i = target.getAttribute('data-id');
+          console.log('ID - ', i);
+          viewDataForCountry(i);
+          return;
+      };
+      target = target.parentElement;
+    }
+  })
+
+  function viewDataForCountry(i) {
+    console.log(objDataGlobal.countries[i]);
+    let item = objDataGlobal.countries[i];
+
+    const countPeopleAll = 7827000000;
+    const countPeople = countPeopleAll / 100000;
+    //data global per 100 thousand population
+    const totalConfirmedForPeople = Math.round(item.TotalConfirmed / countPeople);
+    const totalRecoveredForPeople = Math.round(item.TotalRecovere / countPeople);
+    const totalDeathsForPeople = Math.round(item.TotalDeaths / countPeople);
+
+    //data last day per 100 thousand population
+    const newConfirmedForPeople = Math.round(objDataGlobal.newConfirmed / countPeople);
+    const newRecoveredForPeople = Math.round(objDataGlobal.newRecovered / countPeople);
+    const newDeathsForPeople = Math.round(objDataGlobal.newDeaths / countPeople);
+
+    arrData = [
+      [item.TotalConfirmed, item.TotalRecovered, item.TotalDeaths, 'Global data for the world', '(absolute values)'],
+      [item.NewConfirmed, item.NewRecovered, item.NewDeaths, 'Global data for the last day', '(absolute values)'],
+      [totalConfirmedForPeople, totalRecoveredForPeople , totalDeathsForPeople, 'Global data for the world', '(per 100 thousand population)'],
+      [newConfirmedForPeople, newRecoveredForPeople, newDeathsForPeople, 'Global data for the last day', '(per 100 thousand population)']
+    ];
+
+    const startIndex = 0;
+    addContentGlobalDate(startIndex);
+
+    //select other global data
+    selectData();
+  }
+}
 
 
 /***/ }),
@@ -1990,6 +2246,55 @@ const country_codes = [{
 
 /***/ }),
 
+/***/ "./src/assets/js/main.js":
+/*!*******************************!*\
+  !*** ./src/assets/js/main.js ***!
+  \*******************************/
+/***/ (() => {
+
+addEventListener('load', initEventsDOM);
+
+function initEventsDOM() {
+  //open and close the window to full width
+  const listButtonOpen = document.querySelectorAll('.open');
+  listButtonOpen.forEach((item) => {
+    item.addEventListener('click', function(event) {
+      //define an object button
+      let target;
+      if(event.target.tagName === 'BUTTON') {
+        target = event.target;
+      };
+      if(event.target.tagName === 'I') {
+        target = event.target.parentElement;
+      };
+      const listHiddenModule = document.querySelectorAll('.wrap-data > div');
+      if(!target.classList.contains('close')) {
+        //hidden elements
+        listHiddenModule.forEach((item) => {
+          item.classList.toggle('window-hidden');
+        });
+        //element active full width
+        target.parentElement.parentElement.classList.toggle('full-width');
+        target.innerHTML = '<i class="material-icons">close</i>';
+        target.classList.toggle('close');
+      } else {
+        //close the window that is full width
+        target.classList.toggle('close');
+        target.parentElement.parentElement.classList.toggle('full-width');
+        target.innerHTML = '<i class="material-icons">zoom_out_map</i>';
+        listHiddenModule.forEach((item) => {
+          item.classList.toggle('window-hidden');
+        });
+      }
+    })
+  });
+
+  
+}
+
+
+/***/ }),
+
 /***/ "./src/assets/js/map.js":
 /*!******************************!*\
   !*** ./src/assets/js/map.js ***!
@@ -2006,10 +2311,11 @@ const mapBox = 'pk.eyJ1IjoiZmVkb3JvdmljaHBhdmVsIiwiYSI6ImNraW5lcTkzMzBtMW8ycm81c
 mapboxgl.accessToken = mapBox;
 
 const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/dark-v10',
-  zoom: 1.5,
-  center: [40, 20],
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    zoom: 0.5,
+    center: [50, 20],
+    scroll: false
 });
 
 const latlongMap = new Map();
@@ -2022,28 +2328,27 @@ fetch("http://api.ipstack.com/37.215.40.61?access_key=4d45dec0ea3029c6c749454860
     */
 
 const getMarkColor = (x) => {
-  if (x <= 100) { return '#f6dddd'; }
-  if (x <= 1000) { return '#f4b5b5'; }
-  if (x <= 10000) { return '#fa8080'; }
-  if (x <= 100000) { return '#f84848'; }
-  return '#ae0000';
+    if (x <= 100) { return '#f6dddd'; }
+    if (x <= 1000) { return '#f4b5b5'; }
+    if (x <= 10000) { return '#fa8080'; }
+    if (x <= 100000) { return '#f84848'; }
+    return '#ae0000';
 };
 
-window.onload = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+window.onload = async() => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const data = JSON.parse(localStorage.getItem('summaryApi'));
+    const data = JSON.parse(localStorage.getItem('summaryApi'));
 
-  data.Countries.forEach((country) => {
-    const { TotalConfirmed, Country } = country;
-    new mapboxgl.Marker({
-      color: getMarkColor(TotalConfirmed),
-    })
-      .setLngLat(latlongMap.get(Country))
-      .addTo(map);
-  });
+    data.Countries.forEach((country) => {
+        const { TotalConfirmed, Country } = country;
+        new mapboxgl.Marker({
+                color: getMarkColor(TotalConfirmed),
+            })
+            .setLngLat(latlongMap.get(Country))
+            .addTo(map);
+    });
 };
-
 
 /***/ }),
 
@@ -2317,10 +2622,21 @@ function formatDate(dateString) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_js_map__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/js/map */ "./src/assets/js/map.js");
-/* harmony import */ var _assets_js_script__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/js/script */ "./src/assets/js/script.js");
-/* harmony import */ var _assets_js_script__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_js_script__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _assets_js_country_codes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assets/js/country-codes */ "./src/assets/js/country-codes.js");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _assets_js_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/js/app */ "./src/assets/js/app.js");
+/* harmony import */ var _assets_js_app__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_js_app__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _assets_js_main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assets/js/main */ "./src/assets/js/main.js");
+/* harmony import */ var _assets_js_main__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_js_main__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _normalize_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./normalize.css */ "./src/normalize.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _assets_js_script__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./assets/js/script */ "./src/assets/js/script.js");
+/* harmony import */ var _assets_js_script__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_assets_js_script__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _assets_js_country_codes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./assets/js/country-codes */ "./src/assets/js/country-codes.js");
+
+
+
+
+
+
 
 
 

@@ -5,10 +5,11 @@ const mapBox = 'pk.eyJ1IjoiZmVkb3JvdmljaHBhdmVsIiwiYSI6ImNraW5lcTkzMzBtMW8ycm81c
 mapboxgl.accessToken = mapBox;
 
 const map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/dark-v10',
-  zoom: 1.5,
-  center: [40, 20],
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    zoom: 0.5,
+    center: [50, 20],
+    scroll: false
 });
 
 const latlongMap = new Map();
@@ -21,24 +22,24 @@ fetch("http://api.ipstack.com/37.215.40.61?access_key=4d45dec0ea3029c6c749454860
     */
 
 const getMarkColor = (x) => {
-  if (x <= 100) { return '#f6dddd'; }
-  if (x <= 1000) { return '#f4b5b5'; }
-  if (x <= 10000) { return '#fa8080'; }
-  if (x <= 100000) { return '#f84848'; }
-  return '#ae0000';
+    if (x <= 100) { return '#f6dddd'; }
+    if (x <= 1000) { return '#f4b5b5'; }
+    if (x <= 10000) { return '#fa8080'; }
+    if (x <= 100000) { return '#f84848'; }
+    return '#ae0000';
 };
 
-window.onload = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+window.onload = async() => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const data = JSON.parse(localStorage.getItem('summaryApi'));
+    const data = JSON.parse(localStorage.getItem('summaryApi'));
 
-  data.Countries.forEach((country) => {
-    const { TotalConfirmed, Country } = country;
-    new mapboxgl.Marker({
-      color: getMarkColor(TotalConfirmed),
-    })
-      .setLngLat(latlongMap.get(Country))
-      .addTo(map);
-  });
+    data.Countries.forEach((country) => {
+        const { TotalConfirmed, Country } = country;
+        new mapboxgl.Marker({
+                color: getMarkColor(TotalConfirmed),
+            })
+            .setLngLat(latlongMap.get(Country))
+            .addTo(map);
+    });
 };
