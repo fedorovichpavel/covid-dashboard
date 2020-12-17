@@ -10,18 +10,14 @@ var map = new mapboxgl.Map({
   zoom: 0.5,
   center: [50, 20],
   scroll: false
-});
+}); //  MAP Fullscreen
+//map.addControl(new mapboxgl.FullscreenControl({ container: document.querySelector('map') }));
+
 var latlongMap = new Map();
 
 _countryCodes.country_codes.forEach(function (e) {
   return latlongMap.set(e.country, [e.longitude, e.latitude]);
 });
-/* Определение местоположения
-fetch("http://api.ipstack.com/37.215.40.61?access_key=4d45dec0ea3029c6c74945486042836a&format=1", requestOptions)
-    .then(response => response.json())
-    .then(data => { console.log(data) })
-    */
-
 
 var getMarkColor = function getMarkColor(x) {
   if (x <= 100) {
@@ -53,9 +49,23 @@ fetch('https://api.covid19api.com/summary', requestOptions).then(function (respo
   data.Countries.forEach(function (country) {
     var TotalConfirmed = country.TotalConfirmed,
         Country = country.Country;
+    var marker = document.createElement('div');
+    marker.className = 'marker';
+    marker.style.backgroundColor = getMarkColor(TotalConfirmed);
     new mapboxgl.Marker({
-      color: getMarkColor(TotalConfirmed)
-    }).setLngLat(latlongMap.get(Country)).addTo(map);
+      color: getMarkColor(TotalConfirmed),
+      element: marker
+    }).setLngLat(latlongMap.get(Country)).setPopup(new mapboxgl.Popup({}).setHTML("<strong>".concat(Country, "</strong>: confirmed ").concat(TotalConfirmed))).addTo(map);
+  });
+  var marker1 = document.querySelectorAll('.marker');
+  marker1.forEach(function (e, i) {
+    return e.addEventListener('click', function () {
+      map.flyTo({
+        center: latlongMap.get(data.Countries[i].Country),
+        zoom: 4,
+        essential: true
+      });
+    });
   });
 })["catch"](function () {
   return new Error();
