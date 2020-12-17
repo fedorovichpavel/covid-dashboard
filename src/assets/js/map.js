@@ -29,17 +29,22 @@ const getMarkColor = (x) => {
     return '#ae0000';
 };
 
-window.onload = async() => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    const data = JSON.parse(localStorage.getItem('summaryApi'));
-
-    data.Countries.forEach((country) => {
-        const { TotalConfirmed, Country } = country;
-        new mapboxgl.Marker({
-                color: getMarkColor(TotalConfirmed),
-            })
-            .setLngLat(latlongMap.get(Country))
-            .addTo(map);
-    });
+const requestOptions = {
+    method: 'GET',
+    redirect: 'follow',
 };
+
+fetch('https://api.covid19api.com/summary', requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+        data.Countries.forEach((country) => {
+            const { TotalConfirmed, Country } = country;
+            new mapboxgl.Marker({
+                    color: getMarkColor(TotalConfirmed),
+                })
+                .setLngLat(latlongMap.get(Country))
+                .addTo(map);
+        });
+
+    })
+    .catch(() => new Error());

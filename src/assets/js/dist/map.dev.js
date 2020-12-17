@@ -43,31 +43,20 @@ var getMarkColor = function getMarkColor(x) {
   return '#ae0000';
 };
 
-window.onload = function _callee() {
-  var data;
-  return regeneratorRuntime.async(function _callee$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          _context.next = 2;
-          return regeneratorRuntime.awrap(new Promise(function (resolve) {
-            return setTimeout(resolve, 1000);
-          }));
-
-        case 2:
-          data = JSON.parse(localStorage.getItem('summaryApi'));
-          data.Countries.forEach(function (country) {
-            var TotalConfirmed = country.TotalConfirmed,
-                Country = country.Country;
-            new mapboxgl.Marker({
-              color: getMarkColor(TotalConfirmed)
-            }).setLngLat(latlongMap.get(Country)).addTo(map);
-          });
-
-        case 4:
-        case "end":
-          return _context.stop();
-      }
-    }
-  });
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
 };
+fetch('https://api.covid19api.com/summary', requestOptions).then(function (response) {
+  return response.json();
+}).then(function (data) {
+  data.Countries.forEach(function (country) {
+    var TotalConfirmed = country.TotalConfirmed,
+        Country = country.Country;
+    new mapboxgl.Marker({
+      color: getMarkColor(TotalConfirmed)
+    }).setLngLat(latlongMap.get(Country)).addTo(map);
+  });
+})["catch"](function () {
+  return new Error();
+});
