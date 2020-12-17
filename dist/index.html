@@ -7,11 +7,52 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="shortcut icon" href="./src/assets/img/favicon.ico" type="image/x-icon">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <title>Covid Dashboard</title>
 <link href="./src/style.css" rel="stylesheet"></head>
 
 <body>
     <div id='map'></div>
+    <main>
+        <div class="statistics">
+            <div class="last__report">
+                <div class="country">
+                    <div class="name">Loading...</div>
+                    <div class="find__country">(find)</div>
+                    <div class="pick__country hide">
+                        <div class="search">
+                            <input type="text" id="search__country" placeholder="Search For Country...">
+                            <img class="close" src="src/assets/img/close.svg" alt="closeImg">
+                        </div>
+                        <div class="country-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="total__cases">
+                    <div class="title">Total Cases</div>
+                    <div class="value">0</div>
+                    <div class="new-value">+0</div>
+                </div>
+                <div class="recovered">
+                    <div class="title">Recovered</div>
+                    <div class="value">0</div>
+                    <div class="new-value">+0</div>
+                </div>
+                <div class="deaths">
+                    <div class="title">Deaths</div>
+                    <div class="value">0</div>
+                    <div class="new-value">+0</div>
+                </div>
+            </div>
+            <canvas id="chart"></canvas>
+        </div>
+    </main>
+
+
+    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+    <script src="src/assets/js/countries.js"></script>
+    <script src="src/assets/js/script.js"></script>
 <script src="script.js"></script></body>
 
 </html>
