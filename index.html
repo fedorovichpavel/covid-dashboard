@@ -7,7 +7,6 @@
     <title>Covid Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="shortcut icon" href="./src/assets/img/favicon.ico" type="image/x-icon">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
 
@@ -16,6 +15,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body>
@@ -35,83 +35,87 @@
         </header>
         <!-- CONTENT DATA -->
         <div class="wrap-data">
-          <!-- LEFT COL -->
-          <div class="col-left">
-            <div class="col-left-top">
-                <div class="widget global">
-                  <div class="global-bg">
-                    <h3>Global for the world</h3>
-                    <p class="note">(absolute values)</p>
-                    <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-                    <div class="toggle">
-                        <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
-                        <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
-                    </div>
-                    <div class="data-cases">
-                        <h4>Total Confirmed</h4>
-                        <p>7</p>
-                    </div>
-                    <div class="data-recovered">
-                        <h4>Total Recovered</h4>
-                        <p>4</p>
-                    </div>
-                    <div class="data-deaths">
-                        <h4>Total Deaths</h4>
-                        <p>1</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- CENTER COL -->
-                <div class="col-center">
-                    <div class="widget map">
-                       <h3>Map</h3>
-                       <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-                       <div id='map'></div>
-                    </div>
-                </div> <!--end col center-->
-            </div><!--end col top-->
-
-            <div class="col-left-bottom">
-                <div class="widget module-chart">
-                    <h3>Schedule</h3>
-                    <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-                    <div class="statistics">
-                        <div class="last__report">
-                            <div class="country">
-                                <div class="name">Loading...</div>
-                                <div class="find__country">(find)</div>
-                                <div class="pick__country hide">
-                                    <div class="search">
-                                        <input type="text" id="search__country" placeholder="Search For Country...">
-                                        <img class="close" src="src/assets/img/close.svg" alt="closeImg">
-                                    </div>
-                                    <div class="country-list">
-                                    </div>
-                                </div>
+            <!-- LEFT COL -->
+            <div class="col-left">
+                <div class="col-left-top">
+                    <div class="widget global">
+                        <div class="global-bg">
+                            <h3>Global for the world</h3>
+                            <p class="note">(absolute values)</p>
+                            <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                            <div class="toggle">
+                                <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
+                                <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
                             </div>
-                            <div class="total__cases">
-                                <div class="title">Total Cases</div>
-                                <div class="value">0</div>
-                                <div class="new-value">+0</div>
+                            <div class="data-cases">
+                                <h4>Total Confirmed</h4>
+                                <p>7</p>
                             </div>
-                            <div class="recovered">
-                                <div class="title">Recovered</div>
-                                <div class="value">0</div>
-                                <div class="new-value">+0</div>
+                            <div class="data-recovered">
+                                <h4>Total Recovered</h4>
+                                <p>4</p>
                             </div>
-                            <div class="deaths">
-                                <div class="title">Deaths</div>
-                                <div class="value">0</div>
-                                <div class="new-value">+0</div>
+                            <div class="data-deaths">
+                                <h4>Total Deaths</h4>
+                                <p>1</p>
                             </div>
                         </div>
-                        <canvas id="chart"></canvas>
+                    </div>
+                    <!-- CENTER COL -->
+                    <div class="col-center">
+                        <div class="widget map">
+                            <h3>Map</h3>
+                            <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                            <div id='map' class='map'></div>
+                        </div>
+                    </div>
+                    <!--end col center-->
+                </div>
+                <!--end col top-->
+
+                <div class="col-left-bottom">
+                    <div class="widget module-chart">
+                        <h3>Schedule</h3>
+                        <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                        <div class="statistics">
+                            <div class="last__report">
+                                <div class="country">
+                                    <div class="name">Loading...</div>
+                                    <div class="find__country">(find)</div>
+                                    <div class="pick__country hide">
+                                        <div class="search">
+                                            <input type="text" id="search__country" placeholder="Search For Country...">
+                                            <img class="close" src="src/assets/img/close.svg" alt="closeImg">
+                                        </div>
+                                        <div class="country-list">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="total__cases">
+                                    <div class="title">Total Cases</div>
+                                    <div class="value">0</div>
+                                    <div class="new-value">+0</div>
+                                </div>
+                                <div class="recovered">
+                                    <div class="title">Recovered</div>
+                                    <div class="value">0</div>
+                                    <div class="new-value">+0</div>
+                                </div>
+                                <div class="deaths">
+                                    <div class="title">Deaths</div>
+                                    <div class="value">0</div>
+                                    <div class="new-value">+0</div>
+                                </div>
+                            </div>
+                            <canvas id="chart"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div><!--end col bottom-->
-          </div> <!--end col left-->
-          <!-- RIGHT COL -->
-          <div class="col-right">
+                <!--end col bottom-->
+            </div>
+            <!--end col left-->
+            <!-- RIGHT COL -->
+            <div class="col-right">
                 <div class="widget">
                     <h3>Countries</h3>
                     <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
@@ -124,7 +128,8 @@
                         <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
                     </div>
                 </div>
-          </div> <!--end col right-->
+            </div>
+            <!--end col right-->
         </div>
         <!-- FOOTER -->
         <footer>
