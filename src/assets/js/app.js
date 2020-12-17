@@ -116,10 +116,10 @@ function addToDOM() {
   const newDeathsForPeople = Math.round(objDataGlobal.newDeaths / countPeople);
 
   arrData = [
-    [objDataGlobal.totalConfirmed, objDataGlobal.totalRecovered, objDataGlobal.totalDeaths, 'Global data for the world', '(absolute values)'],
-    [objDataGlobal.newConfirmed, objDataGlobal.newRecovered, objDataGlobal.newDeaths, 'Global data for the last day', '(absolute values)'],
-    [totalConfirmedForPeople, totalRecoveredForPeople , totalDeathsForPeople, 'Global data for the world', '(per 100 thousand population)'],
-    [newConfirmedForPeople, newRecoveredForPeople, newDeathsForPeople, 'Global data for the last day', '(per 100 thousand population)']
+    [objDataGlobal.totalConfirmed, objDataGlobal.totalRecovered, objDataGlobal.totalDeaths, 'Global for the world', '(absolute values)'],
+    [objDataGlobal.newConfirmed, objDataGlobal.newRecovered, objDataGlobal.newDeaths, 'Global for the last day', '(absolute values)'],
+    [totalConfirmedForPeople, totalRecoveredForPeople , totalDeathsForPeople, 'Global for the world', '(per 100 thousand population)'],
+    [newConfirmedForPeople, newRecoveredForPeople, newDeathsForPeople, 'Global for the last day', '(per 100 thousand population)']
   ];
 
   //add data to DOM
@@ -218,10 +218,10 @@ function addToDOM() {
     const newDeathsForPeople = Math.round(objDataGlobal.newDeaths / countPeople);
 
     arrData = [
-      [item.TotalConfirmed, item.TotalRecovered, item.TotalDeaths, 'Global data for the world', '(absolute values)'],
-      [item.NewConfirmed, item.NewRecovered, item.NewDeaths, 'Global data for the last day', '(absolute values)'],
-      [totalConfirmedForPeople, totalRecoveredForPeople , totalDeathsForPeople, 'Global data for the world', '(per 100 thousand population)'],
-      [newConfirmedForPeople, newRecoveredForPeople, newDeathsForPeople, 'Global data for the last day', '(per 100 thousand population)']
+      [item.TotalConfirmed, item.TotalRecovered, item.TotalDeaths, 'Global for the world', '(absolute values)'],
+      [item.NewConfirmed, item.NewRecovered, item.NewDeaths, 'Global for the last day', '(absolute values)'],
+      [totalConfirmedForPeople, totalRecoveredForPeople , totalDeathsForPeople, 'Global for the world', '(per 100 thousand population)'],
+      [newConfirmedForPeople, newRecoveredForPeople, newDeathsForPeople, 'Global for the last day', '(per 100 thousand population)']
     ];
 
     const startIndex = 0;

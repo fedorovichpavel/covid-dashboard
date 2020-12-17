@@ -16,7 +16,7 @@ p {
 
 #map {
     width: 100%;
-    height: 60vh;
+    height: 43vh;
 }
 
 ul {
@@ -30,13 +30,8 @@ a {
 
 body {
     font-family: 'Poiret One', cursive;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.3;
-}
-
-.wrap {
-    /* height: 100vh;
-  min-height: 768px; */
 }
 
 
@@ -71,6 +66,9 @@ h1 span {
     padding-right: 20px;
 }
 
+.title-update {
+    letter-spacing: 2px;
+}
 
 /* DATA STYLES */
 
@@ -79,29 +77,44 @@ h1 span {
 }
 
 .col-left {
-    width: 20%;
+    width: 70%;
 }
 
 .col-right {
     width: 30%;
 }
 
+.col-left-top {
+    display: flex;
+}
+
+.global {
+    flex: 1;
+    height: 48vh;
+}
+
+.global-bg {
+  height: 100%;
+  background-color: #000;
+}
+
 .col-center {
+    flex: 2;
+}
+
+.col-bottom {
     width: 50%;
 }
 
 h3 {
-    margin: 2px;
-    margin-bottom: 0;
     padding: 10px;
     background-color: #000;
+    font-size: 1rem;
     color: #FFF;
     letter-spacing: 3px;
 }
 
 .global p {
-    margin: 0 2px 2px;
-    padding: 0;
     background-color: #000;
 }
 
@@ -111,15 +124,15 @@ h3 {
 
 .widget {
     position: relative;
-    padding: 5px;
+    padding: 2px;
 }
 
 button.icon-menu {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     border: none;
     cursor: pointer;
@@ -145,20 +158,20 @@ button.icon-menu:focus {
     margin-right: 10px;
 }
 
-.global>div {
-    margin-bottom: 5px;
-    padding: 5px;
-    background-color: #272727;
-    border-radius: 10px;
+.global>div:last-child {
+    padding-bottom: 0;
 }
 
 div.toggle,
 div.toggle-data-country {
     display: flex;
     justify-content: center;
-    margin: 0 2px 5px;
     background-color: #000;
-    border-radius: 0 0 10px 10px;
+    padding-bottom: 2px;
+}
+
+div.toggle {
+    padding-bottom: 12px;
 }
 
 div.toggle-data-country {
@@ -177,7 +190,6 @@ div.toggle-country {
     margin: 2px 2px 5px;
     padding: 10px;
     background-color: #000;
-    border-radius: 0 0 10px 10px;
 }
 
 .toggle-country input {
@@ -189,15 +201,17 @@ div.toggle-country {
 }
 
 h4 {
-    padding: 10px;
+    padding: 5px 10px;
+    background-color: #272727;
     color: #FFF;
     letter-spacing: 2px;
+    font-weight: normal;
 }
 
 .col-left p {
     padding: 10px 0;
     text-align: center;
-    font-size: 26px;
+    font-size: 16px;
     color: #FFF;
     letter-spacing: 3px;
 }
@@ -206,7 +220,7 @@ h4 {
     margin-bottom: 5px;
     padding: 15px 0;
     background-color: #272727;
-    height: 200px;
+    height: 62vh;
     overflow-y: scroll;
 }
 
@@ -221,13 +235,16 @@ h4 {
 }
 
 .item-country:hover {
-    /* color: orange; */
     background-color: #8B0000;
 }
 
 .item-country span {
     padding-left: 20px;
     letter-spacing: 2px;
+}
+
+.module-chart {
+  margin: auto;
 }
 
 .window-hidden {
@@ -243,7 +260,7 @@ div.full-width {
 /* FOOTER STYLES */
 
 footer {
-    padding: 20px 0;
+    padding: 10px 0;
     background-color: #8B0000;
     color: #FFF;
 }
