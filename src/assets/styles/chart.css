@@ -1,106 +1,5 @@
 @import 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap';
 
-/*Nullstyle*/
-
-* {
-    padding: 0;
-    margin: 0;
-    border: 0;
-}
-
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-}
-
-:focus,
-:active {
-    outline: none;
-}
-
-a:focus,
-a:active {
-    outline: none;
-}
-
-nav,
-footer,
-header,
-aside {
-    display: block;
-}
-
-html,
-body {
-    height: 100%;
-    width: 100%;
-    font-size: 100%;
-    line-height: 1;
-    font-size: 14px;
-    -ms-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-}
-
-input,
-button,
-textarea {
-    font-family: inherit;
-}
-
-input::-ms-clear {
-    display: none;
-}
-
-button {
-    cursor: pointer;
-}
-
-button::-moz-focus-inner {
-    padding: 0;
-    border: 0;
-}
-
-a,
-a:visited {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: none;
-}
-
-ul li {
-    list-style: none;
-}
-
-img {
-    vertical-align: middle;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-size: inherit;
-    font-weight: inherit;
-}
-
-
-/* ====================================================== */
-
-html {
-    background-color: black;
-}
-
-body {
-    font-family: "Roboto", sans-serif;
-    padding: 0 20px;
-}
-
 .hide {
     display: none;
 }
@@ -118,45 +17,26 @@ body {
     }
 }
 
-header {
-    display: flex;
-    align-items: center;
-    height: 40px;
-    width: 100%;
-    margin: 0 auto;
-}
-
 .statistics {
-    background: linear-gradient(rgb(149, 66, 66), #fb5e5e);
-    width: 100%;
+    background-color: #000;
 }
 
 .last__report {
+  position: absolute;
+  left: 55px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
-    width: 100%;
-    color: #fff;
-    padding: 20px;
+    background-color: #000;
+    color: #FFF;
+    padding: 5px 20px;
 }
 
 .country {
     display: flex;
     justify-content: space-evenly;
-    height: 80px;
     cursor: pointer;
-    width: 100%;
-}
-
-.name {
-    font-size: 2em;
-    color: hsl(288, 97%, 71%);
-}
-
-.find__country {
-    color: hsl(288, 97%, 71%);
 }
 
 .pick__country {
@@ -179,55 +59,36 @@ header {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    color: hsl(288, 97%, 71%);
-    font-weight: 900;
 }
 
 .recovered {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    color: hsl(106, 96%, 35%);
 }
 
 .deaths {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    color: black;
-}
-
-.title {
-    font-size: 1.5em;
-}
-
-.value {
-    font-size: 1.5em;
-    font-weight: 700;
-}
-
-.new-value {
-    font-size: 1.5em;
 }
 
 #chart {
-    width: 80vw;
-    max-height: 300px;
-    min-height: 450px;
-    margin: 0 auto;
-    padding: 30px 0;
+    max-height: 200px;
+    min-height: 200px;
+    padding: 10px 0;
 }
 
 .search input {
     width: 300px;
     height: 30px;
     background-color: transparent;
-    color: #ffffff;
+    color: #FFF;
     padding: 10px;
 }
 
 .search input::placeholder {
-    color: #fff;
+    color: #FFF;
     font-size: 1.2em;
 }
 

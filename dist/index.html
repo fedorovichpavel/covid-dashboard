@@ -27,7 +27,7 @@
                 <h1><span>COVID</span> - 2020</h1>
             </div>
             <div class="update-date">
-                <p>Last update:
+                <p><span class="title-update">Last update:</span>
                     <span id="dd"></span>/<span id="mm"></span>/<span id="yy"></span>
                     <span id="hours"></span>:<span id="minutes"></span>
                 </p>
@@ -35,10 +35,12 @@
         </header>
         <!-- CONTENT DATA -->
         <div class="wrap-data">
-            <!-- LEFT COL -->
-            <div class="col-left">
+          <!-- LEFT COL -->
+          <div class="col-left">
+            <div class="col-left-top">
                 <div class="widget global">
-                    <h3>Global data for the world</h3>
+                  <div class="global-bg">
+                    <h3>Global for the world</h3>
                     <p class="note">(absolute values)</p>
                     <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
                     <div class="toggle">
@@ -57,32 +59,20 @@
                         <h4>Total Deaths</h4>
                         <p>1</p>
                     </div>
+                  </div>
                 </div>
-            </div>
-            <!-- CENTER COL -->
-            <div class="col-center">
-                <div class="widget map">
-                    <h3>Map</h3>
-                    <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-                    <!-- add BLOCK Pavel -->
-                    <div id='map'></div>
-                </div>
-            </div>
-            <!-- RIGHT COL -->
-            <div class="col-right">
-                <div class="widget">
-                    <h3>Countries</h3>
-                    <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-                    <div class="toggle-country"><input type="text"></div>
-                    <ul class="countries">
-                    </ul>
-                    <div class="toggle-data-country">
-                        <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
-                        <span class="title-toggle">global by country</span>
-                        <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
+                <!-- CENTER COL -->
+                <div class="col-center">
+                    <div class="widget map">
+                       <h3>Map</h3>
+                       <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                       <div id='map'></div>
                     </div>
-                </div>
-                <div class="widget">
+                </div> <!--end col center-->
+            </div><!--end col top-->
+
+            <div class="col-left-bottom">
+                <div class="widget module-chart">
                     <h3>Schedule</h3>
                     <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
                     <div class="statistics">
@@ -118,7 +108,23 @@
                         <canvas id="chart"></canvas>
                     </div>
                 </div>
-            </div>
+            </div><!--end col bottom-->
+          </div> <!--end col left-->
+          <!-- RIGHT COL -->
+          <div class="col-right">
+                <div class="widget">
+                    <h3>Countries</h3>
+                    <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                    <div class="toggle-country"><input type="text"></div>
+                    <ul class="countries">
+                    </ul>
+                    <div class="toggle-data-country">
+                        <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
+                        <span class="title-toggle">global by country</span>
+                        <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
+                    </div>
+                </div>
+          </div> <!--end col right-->
         </div>
         <!-- FOOTER -->
         <footer>

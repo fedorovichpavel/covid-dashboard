@@ -214,8 +214,8 @@ function chartIt() {
 					label: "Deaths",
 					data: deathsArr,
 					fill: false,
-					borderColor: "black",
-					backgroundColor: "black",
+					borderColor: "#8B0000",
+					backgroundColor: "#8B0000",
 					borderWidth: 1,
 				},
 			],
@@ -248,4 +248,3 @@ function formatDate(dateString) {
 
 	return `${date.getDate()} ${allMonths[date.getMonth() - 1]}`;
 }
-
