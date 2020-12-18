@@ -2622,12 +2622,13 @@ function showAllCountries() {
 			countryList.innerHTML += `<ul id='${changeUlListId}'></ul>`;
 			i++;
 		}
+		let countryName = `${country.name}`;
 		document.getElementById(`${changeUlListId}`).innerHTML += `
 		<li onclick='fetchDataCountries("${country.name}")' id="${country.name}">
 		${country.name}
 		</li>
-
 		`
+
 	})
 };
 let listsNumber = 3;
@@ -2799,9 +2800,11 @@ function chartIt() {
 	}
 
 	chart = new Chart(ctx, {
-		type: "bar",
+		type: "line",
 		data: {
 			datasets: [{
+				pointBorderWidth: 1,
+				borderWidth: 1,
 				label: "Cases",
 				data: casesArr,
 				fill: false,
@@ -2829,8 +2832,21 @@ function chartIt() {
 			labels: datesArr,
 		},
 		options: {
+			elements: {
+				line: {
+					tension: 0 // disables bezier curves
+				}
+			},
 			responsive: true,
 			maintainAspectRatio: false,
+			layout: {
+				padding: {
+					left: 0,
+					right: 0,
+					top: 0,
+					bottom: 0
+				}
+			}
 		},
 	});
 }
