@@ -2835,27 +2835,12 @@ function chartIt() {
 	});
 }
 
-// FORMAT DATES
-const allMonths = [
-	"Jan",
-	"Feb",
-	"Mar",
-	"Apr",
-	"May",
-	"Jun",
-	"Aug",
-	"Sep",
-	"Oct",
-	"Nov",
-	"Dec",
-	"Jan"
-];
+
 
 function formatDate(dateString) {
 	let date = new Date(dateString);
-	let month = date.getMonth();
-	console.log(date.getMonth());
-	return `${date.getDate()} ${allMonths[month]}`;
+	let month = date.toString().slice(4, 7);
+	return `${date.getDate()} ${month}`;
 }
 
 /***/ }),
