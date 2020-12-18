@@ -25,7 +25,6 @@ function showAllCountries() {
 		${country.name}
 		</li>
 		`
-
 	})
 };
 let listsNumber = 3;
