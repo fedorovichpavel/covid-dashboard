@@ -2856,7 +2856,6 @@ function formatDate(dateString) {
 	let month = date.getMonth();
 	console.log(date.getMonth());
 
-
 	return `${date.getDate()} ${allMonths[month]}`;
 }
 
