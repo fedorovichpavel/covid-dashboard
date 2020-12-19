@@ -4,6 +4,7 @@ const changeIcon = document.querySelector('.change__icon')
 const countryList = document.querySelector('.country-list')
 const hideList = document.querySelector('.close')
 const input = document.getElementById('search__country')
+const widget = document.querySelector('.icon-menu.open')
 
 
 function showAllCountries() {
@@ -93,7 +94,6 @@ country_list.forEach(country => {
 		yourCountry = country.name;
 	}
 })
-
 
 function fetchDataCountries(country) {
 	yourCountry = country;

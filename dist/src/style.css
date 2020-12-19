@@ -434,8 +434,11 @@ template {
 	justify-content: space-between;
 	width: 100%;
 }
-
-#chart {
+.full-width #chart {
+	height: 600px;
+	max-height: 700px;
+}
+div #chart {
 	max-height: 247px;
 	min-height: 200px;
 	padding: 10px 0;
@@ -452,6 +455,9 @@ template {
 .search input::placeholder {
 	color: #fff;
 	font-size: 1.2em;
+}
+.search__country {
+	background-color: transparent;
 }
 
 .search img {
