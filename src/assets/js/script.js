@@ -1,7 +1,6 @@
-import { country_list } from './countries';
-
 const searchCountry = document.querySelector('.pick__country')
 const nameOfCountry = document.querySelector('.name')
+const changeIcon = document.querySelector('.change__icon')
 const countryList = document.querySelector('.country-list')
 const hideList = document.querySelector('.close')
 const input = document.getElementById('search__country')
@@ -19,11 +18,11 @@ function showAllCountries() {
 			countryList.innerHTML += `<ul id='${changeUlListId}'></ul>`;
 			i++;
 		}
-		let countryName = `${country.name}`;
 		document.getElementById(`${changeUlListId}`).innerHTML += `
 		<li onclick='fetchDataCountries("${country.name}")' id="${country.name}">
 		${country.name}
 		</li>
+
 		`
 	})
 };
@@ -34,6 +33,13 @@ hideList.addEventListener('click', () => {
 	searchCountry.classList.add('hide');
 });
 nameOfCountry.addEventListener('click', () => {
+	input.value = '';
+	resetCountryList();
+	searchCountry.classList.toggle('hide');
+	searchCountry.classList.add('fadeIn');
+	input.focus();
+});
+changeIcon.addEventListener('click', () => {
 	input.value = '';
 	resetCountryList();
 	searchCountry.classList.toggle('hide');
@@ -78,7 +84,6 @@ let globalDataArr = [],
 	recoveredArr = [],
 	deathsArr = [],
 	deaths = [],
-	dates = [],
 	datesArr = [];
 
 let codeOfCountry = geoplugin_countryCode(),
