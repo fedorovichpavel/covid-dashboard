@@ -5,3 +5,4 @@ import './normalize.css';
 import './style.css';
 
 import './assets/js/country-codes';
+import './assets/js/dataCountry';

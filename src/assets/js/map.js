@@ -12,7 +12,7 @@ const map = new mapboxgl.Map({
     scroll: false
 });
 //  MAP Fullscreen
-//map.addControl(new mapboxgl.FullscreenControl({ container: document.querySelector('map') }));
+// map.addControl(new mapboxgl.FullscreenControl({ container: document.querySelector('#map') }));
 
 const latlongMap = new Map();
 country_codes.forEach((e) => latlongMap.set(e.country, [e.longitude, e.latitude]));
@@ -60,6 +60,12 @@ fetch('https://api.covid19api.com/summary', requestOptions)
                 essential: true
             });
         }));
+
+        document.querySelector('#map').addEventListener('click', function(event) {
+          console.log(event.target);
+          console.log(document.querySelector('.mapboxgl-popup-content strong').textContent);
+        })
+
 
     })
     .catch(() => new Error());

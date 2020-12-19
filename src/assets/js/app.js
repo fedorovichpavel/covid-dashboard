@@ -1,3 +1,4 @@
+import { dataCountry } from './dataCountry';
 //GLOBAL DATA
 let objDataGlobal = {
   totalConfirmed: 0,
@@ -9,6 +10,7 @@ let objDataGlobal = {
   countries: []
 }
 let data;
+let arrData;
 
 //get data on page load
 addEventListener('load', getData);
@@ -180,6 +182,17 @@ function addToDOM() {
     let arrWork = objDataGlobal.countries;
     arrWork.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
     item.textContent = arrWork[i].Country;
+
+    let cMarker = arrWork[i].Country;
+    console.log(cMarker);
+    console.log(dataCountry.filter((item) => item.name === cMarker)[0].flag);
+    const flag = dataCountry.filter((item) => item.name === cMarker)[0].flag;
+    let itemFlag = document.createElement('span');
+    itemFlag.classList.add('flag-country');
+    item.prepend(itemFlag);
+    itemFlag.style.background = `url(${flag}) no-repeat left center`;
+    itemFlag.style.backgroundSize = 'cover';
+
     const countForItem = document.createElement('span');
     item.appendChild(countForItem);
     countForItem.textContent = ' - ' + arrWork[i].TotalConfirmed.toLocaleString();
