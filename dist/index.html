@@ -38,15 +38,16 @@
             <!-- LEFT COL -->
             <div class="col-left">
                 <div class="col-left-top">
+                  <div class="col-top-left">
                     <div class="widget global">
-                        <div class="global-bg">
+                        <!-- <div class="global-bg"> -->
                             <h3>Global for the world</h3>
                             <p class="note">(absolute values)</p>
                             <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-                            <div class="toggle">
+                            <!-- <div class="toggle">
                                 <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
                                 <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
-                            </div>
+                            </div> -->
                             <div class="data-cases">
                                 <h4>Total Confirmed</h4>
                                 <p>7</p>
@@ -59,14 +60,24 @@
                                 <h4>Total Deaths</h4>
                                 <p>1</p>
                             </div>
-                        </div>
+                            <div class="toggle">
+                                <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
+                                <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
+                            </div>
+                        <!-- </div> -->
                     </div>
+                  </div>
                     <!-- CENTER COL -->
                     <div class="col-center">
                         <div class="widget map">
                             <h3>Map</h3>
                             <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
                             <div id='map' class='map'></div>
+                            <div class="toggle">
+                                <button class="icon-menu map-prev"><i class="material-icons">arrow_left</i></button>
+                                <div class="map-legend" style="border: 1px solid red; width: 400px; margin-right: 10px;"></div>
+                                <button class="icon-menu map-next"><i class="material-icons">arrow_right</i></button>
+                            </div>
                         </div>
                     </div>
                     <!--end col center-->
