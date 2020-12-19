@@ -40,31 +40,26 @@
                 <div class="col-left-top">
                   <div class="col-top-left">
                     <div class="widget global">
-                        <!-- <div class="global-bg"> -->
-                            <h3>Global for the world</h3>
-                            <p class="note">(absolute values)</p>
-                            <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-                            <!-- <div class="toggle">
-                                <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
-                                <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
-                            </div> -->
-                            <div class="data-cases">
-                                <h4>Total Confirmed</h4>
-                                <p>7</p>
-                            </div>
-                            <div class="data-recovered">
-                                <h4>Total Recovered</h4>
-                                <p>4</p>
-                            </div>
-                            <div class="data-deaths">
-                                <h4>Total Deaths</h4>
-                                <p>1</p>
-                            </div>
-                            <div class="toggle">
-                                <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
-                                <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
-                            </div>
-                        <!-- </div> -->
+                        <h3>Global for the world</h3>
+                        <p class="note">(absolute values)</p>
+                        <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                        <div class="data-cases">
+                            <h4>Total Confirmed</h4>
+                            <p></p>
+                        </div>
+                        <div class="data-recovered">
+                            <h4>Total Recovered</h4>
+                            <p></p>
+                        </div>
+                        <div class="data-deaths">
+                            <h4>Total Deaths</h4>
+                            <p></p>
+                        </div>
+                        <div class="toggle">
+                            <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
+                            <button class="icon-menu button-global" title="global"><i class="material-icons">sick</i></button>
+                            <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
+                        </div>
                     </div>
                   </div>
                     <!-- CENTER COL -->
@@ -130,13 +125,16 @@
                 <div class="widget">
                     <h3>Countries</h3>
                     <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-                    <div class="toggle-country"><input type="text"></div>
+                    <div class="toggle-country">
+                      <input type="text" name="country" placeholder="enter country">
+                      <button class="search-country"><i class="material-icons">search</i></button>
+                    </div>
                     <ul class="countries">
                     </ul>
                     <div class="toggle-data-country">
-                        <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
-                        <span class="title-toggle">global by country</span>
-                        <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
+                        <button class="icon-menu prev-data"><i class="material-icons">arrow_left</i></button>
+                        <span class="title-toggle">global by country confirmed</span>
+                        <button class="icon-menu next-data"><i class="material-icons">arrow_right</i></button>
                     </div>
                 </div>
             </div>
