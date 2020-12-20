@@ -1,5 +1,10 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.mapFly = mapFly;
+
 var _countryCodes = require("./country-codes");
 
 var mapBox = 'pk.eyJ1IjoiZmVkb3JvdmljaHBhdmVsIiwiYSI6ImNraW5lcTkzMzBtMW8ycm81cTd6N3N3aDIifQ.botvkeUgOwWBdkRdCIwuWg';
@@ -11,7 +16,7 @@ var map = new mapboxgl.Map({
   center: [50, 20],
   scroll: false
 }); //  MAP Fullscreen
-//map.addControl(new mapboxgl.FullscreenControl({ container: document.querySelector('map') }));
+// map.addControl(new mapboxgl.FullscreenControl({ container: document.querySelector('#map') }));
 
 var latlongMap = new Map();
 
@@ -20,10 +25,6 @@ _countryCodes.country_codes.forEach(function (e) {
 });
 
 var getMarkColor = function getMarkColor(x) {
-  if (x <= 100) {
-    return '#f6dddd';
-  }
-
   if (x <= 1000) {
     return '#f4b5b5';
   }
@@ -43,6 +44,15 @@ var requestOptions = {
   method: 'GET',
   redirect: 'follow'
 };
+
+function mapFly(name) {
+  return map.flyTo({
+    center: latlongMap.get(name),
+    zoom: 4,
+    essential: true
+  });
+}
+
 fetch('https://api.covid19api.com/summary', requestOptions).then(function (response) {
   return response.json();
 }).then(function (data) {
@@ -58,14 +68,9 @@ fetch('https://api.covid19api.com/summary', requestOptions).then(function (respo
       element: marker
     }).setLngLat(latlongMap.get(Country)).addTo(map);
   });
-
-  function mapFly(i) {
-    return map.flyTo({
-      center: latlongMap.get(data.Countries[i].Country),
-      zoom: 4,
-      essential: true
-    });
-  }
+  document.querySelector('.map__title').innerHTML = 'Map Global for the World';
+  var mapLegend = document.querySelector('.map-legend');
+  mapLegend.innerHTML = "<div class='map_leg1'></div> < 1000 <div class='map_leg2'></div> < 10 000 <div class='map_leg3'></div> < 100 000<div class='map_leg4'></div> > 100 000";
 
   function addPopup(i) {
     var popup = new mapboxgl.Popup({
@@ -82,7 +87,8 @@ fetch('https://api.covid19api.com/summary', requestOptions).then(function (respo
     if (target.className.slice(0, 6) !== 'marker') {
       return;
     } else {
-      mapFly(target.getAttribute('data-id'));
+      var id = target.getAttribute('data-id');
+      mapFly(data.Countries[id].Country);
     }
   });
   allMap.addEventListener('mouseover', function (event) {

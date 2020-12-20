@@ -18,7 +18,6 @@ const latlongMap = new Map();
 country_codes.forEach((e) => latlongMap.set(e.country, [e.longitude, e.latitude]));
 
 const getMarkColor = (x) => {
-    if (x <= 100) { return '#f6dddd'; }
     if (x <= 1000) { return '#f4b5b5'; }
     if (x <= 10000) { return '#fa8080'; }
     if (x <= 100000) { return '#f84848'; }
@@ -31,6 +30,13 @@ const requestOptions = {
 };
 
 
+export function mapFly(name) {
+    return map.flyTo({
+        center: latlongMap.get(name),
+        zoom: 4,
+        essential: true
+    });
+}
 
 fetch('https://api.covid19api.com/summary', requestOptions)
     .then((response) => response.json())
@@ -50,19 +56,14 @@ fetch('https://api.covid19api.com/summary', requestOptions)
                 })
                 .setLngLat(latlongMap.get(Country))
                 .addTo(map);
-
-
-
         });
 
+        document.querySelector('.map__title').innerHTML = 'Map Global for the World';
+        const mapLegend = document.querySelector('.map-legend');
+        mapLegend.innerHTML = "<div class='map_leg1'></div> < 1000 <div class='map_leg2'></div> < 10 000 <div class='map_leg3'></div> < 100 000<div class='map_leg4'></div> > 100 000";
 
-        function mapFly(i) {
-            return map.flyTo({
-                center: latlongMap.get(data.Countries[i].Country),
-                zoom: 4,
-                essential: true
-            });
-        }
+
+
 
         function addPopup(i) {
             const popup = new mapboxgl.Popup({
@@ -77,7 +78,8 @@ fetch('https://api.covid19api.com/summary', requestOptions)
         allMap.addEventListener('click', function(event) {
             const target = event.target;
             if (target.className.slice(0, 6) !== 'marker') { return; } else {
-                mapFly(target.getAttribute('data-id'));
+                const id = target.getAttribute('data-id');
+                mapFly(data.Countries[id].Country);
             }
         });
 
@@ -95,12 +97,6 @@ fetch('https://api.covid19api.com/summary', requestOptions)
                 }
             });
         });
-
-        document.querySelector('#map').addEventListener('click', function(event) {
-          console.log(event.target);
-          console.log(document.querySelector('.mapboxgl-popup-content strong').textContent);
-        })
-
 
     })
     .catch(() => new Error());

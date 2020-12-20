@@ -3,18 +3,18 @@
 
 <head>
 
-	<meta charset="utf-8">
-	<title>Covid Dashboard</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Covid Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="shortcut icon" href="./src/assets/img/favicon.ico" type="image/x-icon">
-	<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
+    <link rel="shortcut icon" href="./src/assets/img/favicon.ico" type="image/x-icon">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
 
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-	<link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 
-	<link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 
@@ -37,39 +37,39 @@
             <!-- LEFT COL -->
             <div class="col-left">
                 <div class="col-left-top">
-                  <div class="col-top-left">
-                    <div class="widget global">
-                        <h3>Global for the world</h3>
-                        <p class="note">(absolute values)</p>
-                        <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-                        <div class="data-cases">
-                            <h4>Total Confirmed</h4>
-                            <p></p>
-                        </div>
-                        <div class="data-recovered">
-                            <h4>Total Recovered</h4>
-                            <p></p>
-                        </div>
-                        <div class="data-deaths">
-                            <h4>Total Deaths</h4>
-                            <p></p>
-                        </div>
-                        <div class="toggle">
-                            <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
-                            <button class="icon-menu button-global" title="global"><i class="material-icons">sick</i></button>
-                            <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
+                    <div class="col-top-left">
+                        <div class="widget global">
+                            <h3>Global for the world</h3>
+                            <p class="note">(absolute values)</p>
+                            <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                            <div class="data-cases">
+                                <h4>Total Confirmed</h4>
+                                <p></p>
+                            </div>
+                            <div class="data-recovered">
+                                <h4>Total Recovered</h4>
+                                <p></p>
+                            </div>
+                            <div class="data-deaths">
+                                <h4>Total Deaths</h4>
+                                <p></p>
+                            </div>
+                            <div class="toggle">
+                                <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
+                                <button class="icon-menu button-global" title="global"><i class="material-icons">sick</i></button>
+                                <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
+                            </div>
                         </div>
                     </div>
-                  </div>
                     <!-- CENTER COL -->
                     <div class="col-center">
                         <div class="widget map">
-                            <h3>Map</h3>
+                            <h3 class="map__title">Map</h3>
                             <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
                             <div id='map' class='map'></div>
                             <div class="toggle">
                                 <button class="icon-menu map-prev"><i class="material-icons">arrow_left</i></button>
-                                <div class="map-legend" style="border: 1px solid red; width: 400px; margin-right: 10px;"></div>
+                                <div class="map-legend"></div>
                                 <button class="icon-menu map-next"><i class="material-icons">arrow_right</i></button>
                             </div>
                         </div>
@@ -125,8 +125,8 @@
                     <h3>Countries</h3>
                     <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
                     <div class="toggle-country">
-                      <input type="text" name="country" placeholder="enter country">
-                      <button class="search-country"><i class="material-icons">search</i></button>
+                        <input type="text" name="country" placeholder="enter country">
+                        <button class="search-country"><i class="material-icons">search</i></button>
                     </div>
                     <ul class="countries">
                     </ul>
