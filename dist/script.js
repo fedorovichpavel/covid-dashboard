@@ -252,7 +252,27 @@ function addToDOM() {
       //countForItem.textContent = ' - ' + arrWork[i].TotalConfirmed.toLocaleString();
     });
   }
+  let listCountries = document.querySelectorAll('.countries .item-country');
+  listCountries.forEach((item, i) => {
+    // item.setAttribute('data-id', objDataGlobal.countries[i].ID);
+    let arrWork = objDataGlobal.countries;
+    arrWork.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
+    item.textContent = arrWork[i].Country;
 
+    let cMarker = arrWork[i].Country;
+    console.log(cMarker);
+    console.log(_dataCountry__WEBPACK_IMPORTED_MODULE_0__.dataCountry.filter((item) => item.name === cMarker)[0].flag);
+    const flag = _dataCountry__WEBPACK_IMPORTED_MODULE_0__.dataCountry.filter((item) => item.name === cMarker)[0].flag;
+    let itemFlag = document.createElement('span');
+    itemFlag.classList.add('flag-country');
+    item.prepend(itemFlag);
+    itemFlag.style.background = `url(${flag}) no-repeat left center`;
+    itemFlag.style.backgroundSize = 'cover';
+
+    const countForItem = document.createElement('span');
+    item.appendChild(countForItem);
+    countForItem.textContent = ' - ' + arrWork[i].TotalConfirmed.toLocaleString();
+  });
   //get data by country for click
   let selected;
   parentCountries.addEventListener('click', function(event) {

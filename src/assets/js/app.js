@@ -160,6 +160,29 @@ function addToDOM() {
     itemList.classList.add('item-country');
     itemList.setAttribute('data-id', i);
     parentCountries.appendChild(itemList);
+
+  }
+  let listCountries = document.querySelectorAll('.countries .item-country');
+  listCountries.forEach((item, i) => {
+    // item.setAttribute('data-id', objDataGlobal.countries[i].ID);
+    let arrWork = objDataGlobal.countries;
+    arrWork.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
+    item.textContent = arrWork[i].Country;
+
+    let cMarker = arrWork[i].Country;
+    console.log(cMarker);
+    console.log(dataCountry.filter((item) => item.name === cMarker)[0].flag);
+    const flag = dataCountry.filter((item) => item.name === cMarker)[0].flag;
+    let itemFlag = document.createElement('span');
+    itemFlag.classList.add('flag-country');
+    item.prepend(itemFlag);
+    itemFlag.style.background = `url(${flag}) no-repeat left center`;
+    itemFlag.style.backgroundSize = 'cover';
+
+    const countForItem = document.createElement('span');
+    item.appendChild(countForItem);
+    countForItem.textContent = ' - ' + arrWork[i].TotalConfirmed.toLocaleString();
+  });
   };
 
   //start list countries
@@ -171,6 +194,7 @@ function addToDOM() {
 
   function addNewListCountries(sort, arrWork) {
     let listCountries = document.querySelectorAll('.countries .item-country');
+
 
     listCountries.forEach((item, i) => {
       // //sort

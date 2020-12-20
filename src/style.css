@@ -183,7 +183,6 @@ button.icon-menu:focus {
 .button-global {
     margin-right: 10px;
 }
-
 div.toggle,
 div.toggle-data-country {
     display: flex;
@@ -352,22 +351,18 @@ div.full-width #map {
   width: 100%;
   height: 70vh;
 }
-
 div.full-width .toggle-country input {
   width: 50%;
   font-size: 1.5rem;
 }
-
 button.search-country {
   width: 35px;
   height: 35px;
 }
-
 div.full-width .countries {
   font-size: 1.5rem;
   letter-spacing: 3px;
 }
-
 div.full-width .toggle {
   bottom: 20px;
 }
@@ -406,7 +401,6 @@ footer p {
 footer img {
     max-width: 100%;
 }
-
 /* MEDIA */
 
 @media screen and (max-width: 1000px) {
