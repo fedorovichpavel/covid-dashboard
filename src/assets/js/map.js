@@ -42,19 +42,18 @@ fetch('https://api.covid19api.com/summary', requestOptions)
             const { TotalConfirmed, Country } = country;
             const marker = document.createElement('div');
             marker.className = 'marker';
+            marker.setAttribute('data-id', i);
             marker.style.backgroundColor = getMarkColor(TotalConfirmed);
             new mapboxgl.Marker({
                     color: getMarkColor(TotalConfirmed),
                     element: marker
                 })
                 .setLngLat(latlongMap.get(Country))
-                // .setPopup(new mapboxgl.Popup({}).setHTML(`<strong>${Country}</strong>: confirmed ${TotalConfirmed}`))
                 .addTo(map);
 
 
 
         });
-
 
 
         function mapFly(i) {
@@ -64,25 +63,38 @@ fetch('https://api.covid19api.com/summary', requestOptions)
                 essential: true
             });
         }
-        const marker1 = document.querySelectorAll('.marker');
-        marker1.forEach((e, i) => e.addEventListener('click', () => mapFly(i)));
 
-        marker1.forEach((e, i) => {
+        function addPopup(i) {
             const popup = new mapboxgl.Popup({
                 closeButton: false,
                 closeOnClick: false
             });
-            e.addEventListener('mouseenter', () => popup.setLngLat(latlongMap.get(data.Countries[i].Country)).setHTML(`<strong>${data.Countries[i].Country}</strong>: confirmed ${data.Countries[i].TotalConfirmed}`).addTo(map));
-            e.addEventListener('mouseout', () => popup.remove());
+            popup.setLngLat(latlongMap.get(data.Countries[i].Country)).setHTML(`<strong>${data.Countries[i].Country}</strong>: confirmed ${data.Countries[i].TotalConfirmed}`).addTo(map);
+        }
 
+        const allMap = document.querySelector('.map');
+
+        allMap.addEventListener('click', function(event) {
+            const target = event.target;
+            if (target.className.slice(0, 6) !== 'marker') { return; } else {
+                mapFly(target.getAttribute('data-id'));
+            }
         });
 
-        console.log();
+        allMap.addEventListener('mouseover', function(event) {
+            const target = event.target;
+            if (target.className.slice(0, 6) !== 'marker') { return; } else {
+                const i = target.getAttribute('data-id');
+                addPopup(i);
+            }
 
-        document.querySelector('#map').addEventListener('click', function(event) {
-            console.log(event.target);
-            console.log(document.querySelector('.mapboxgl-popup-content').innerHTML);
-        })
+            allMap.addEventListener('mouseout', function(event) {
+                const target = event.target;
+                if (target.className.slice(0, 6) !== 'marker') { return; } else {
+                    if (document.querySelector('.mapboxgl-popup')) document.querySelector('.mapboxgl-popup').remove();
+                }
+            });
+        });
 
     })
     .catch(() => new Error());

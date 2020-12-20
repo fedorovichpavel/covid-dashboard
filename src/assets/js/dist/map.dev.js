@@ -51,12 +51,12 @@ fetch('https://api.covid19api.com/summary', requestOptions).then(function (respo
         Country = country.Country;
     var marker = document.createElement('div');
     marker.className = 'marker';
+    marker.setAttribute('data-id', i);
     marker.style.backgroundColor = getMarkColor(TotalConfirmed);
     new mapboxgl.Marker({
       color: getMarkColor(TotalConfirmed),
       element: marker
-    }).setLngLat(latlongMap.get(Country)) // .setPopup(new mapboxgl.Popup({}).setHTML(`<strong>${Country}</strong>: confirmed ${TotalConfirmed}`))
-    .addTo(map);
+    }).setLngLat(latlongMap.get(Country)).addTo(map);
   });
 
   function mapFly(i) {
@@ -67,28 +67,43 @@ fetch('https://api.covid19api.com/summary', requestOptions).then(function (respo
     });
   }
 
-  var marker1 = document.querySelectorAll('.marker');
-  marker1.forEach(function (e, i) {
-    return e.addEventListener('click', function () {
-      return mapFly(i);
-    });
-  });
-  marker1.forEach(function (e, i) {
+  function addPopup(i) {
     var popup = new mapboxgl.Popup({
       closeButton: false,
       closeOnClick: false
     });
-    e.addEventListener('mouseenter', function () {
-      return popup.setLngLat(latlongMap.get(data.Countries[i].Country)).setHTML("<strong>".concat(data.Countries[i].Country, "</strong>: confirmed ").concat(data.Countries[i].TotalConfirmed)).addTo(map);
-    });
-    e.addEventListener('mouseout', function () {
-      return popup.remove();
-    });
+    popup.setLngLat(latlongMap.get(data.Countries[i].Country)).setHTML("<strong>".concat(data.Countries[i].Country, "</strong>: confirmed ").concat(data.Countries[i].TotalConfirmed)).addTo(map);
+  }
+
+  var allMap = document.querySelector('.map');
+  allMap.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.className.slice(0, 6) !== 'marker') {
+      return;
+    } else {
+      mapFly(target.getAttribute('data-id'));
+    }
   });
-  console.log();
-  document.querySelector('#map').addEventListener('click', function (event) {
-    console.log(event.target);
-    console.log(document.querySelector('.mapboxgl-popup-content').innerHTML);
+  allMap.addEventListener('mouseover', function (event) {
+    var target = event.target;
+
+    if (target.className.slice(0, 6) !== 'marker') {
+      return;
+    } else {
+      var i = target.getAttribute('data-id');
+      addPopup(i);
+    }
+
+    allMap.addEventListener('mouseout', function (event) {
+      var target = event.target;
+
+      if (target.className.slice(0, 6) !== 'marker') {
+        return;
+      } else {
+        if (document.querySelector('.mapboxgl-popup')) document.querySelector('.mapboxgl-popup').remove();
+      }
+    });
   });
 })["catch"](function () {
   return new Error();
