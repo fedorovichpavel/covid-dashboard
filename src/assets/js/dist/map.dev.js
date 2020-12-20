@@ -46,7 +46,7 @@ var requestOptions = {
 fetch('https://api.covid19api.com/summary', requestOptions).then(function (response) {
   return response.json();
 }).then(function (data) {
-  data.Countries.forEach(function (country) {
+  data.Countries.forEach(function (country, i) {
     var TotalConfirmed = country.TotalConfirmed,
         Country = country.Country;
     var marker = document.createElement('div');
@@ -55,17 +55,40 @@ fetch('https://api.covid19api.com/summary', requestOptions).then(function (respo
     new mapboxgl.Marker({
       color: getMarkColor(TotalConfirmed),
       element: marker
-    }).setLngLat(latlongMap.get(Country)).setPopup(new mapboxgl.Popup({}).setHTML("<strong>".concat(Country, "</strong>: confirmed ").concat(TotalConfirmed))).addTo(map);
+    }).setLngLat(latlongMap.get(Country)) // .setPopup(new mapboxgl.Popup({}).setHTML(`<strong>${Country}</strong>: confirmed ${TotalConfirmed}`))
+    .addTo(map);
   });
+
+  function mapFly(i) {
+    return map.flyTo({
+      center: latlongMap.get(data.Countries[i].Country),
+      zoom: 4,
+      essential: true
+    });
+  }
+
   var marker1 = document.querySelectorAll('.marker');
   marker1.forEach(function (e, i) {
     return e.addEventListener('click', function () {
-      map.flyTo({
-        center: latlongMap.get(data.Countries[i].Country),
-        zoom: 4,
-        essential: true
-      });
+      return mapFly(i);
     });
+  });
+  marker1.forEach(function (e, i) {
+    var popup = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false
+    });
+    e.addEventListener('mouseenter', function () {
+      return popup.setLngLat(latlongMap.get(data.Countries[i].Country)).setHTML("<strong>".concat(data.Countries[i].Country, "</strong>: confirmed ").concat(data.Countries[i].TotalConfirmed)).addTo(map);
+    });
+    e.addEventListener('mouseout', function () {
+      return popup.remove();
+    });
+  });
+  console.log();
+  document.querySelector('#map').addEventListener('click', function (event) {
+    console.log(event.target);
+    console.log(document.querySelector('.mapboxgl-popup-content').innerHTML);
   });
 })["catch"](function () {
   return new Error();
