@@ -13,8 +13,9 @@ function initEventsDOM() {
       if(event.target.tagName === 'I') {
         target = event.target.parentElement;
       };
-      // const listHiddenModule = document.querySelectorAll('.wrap-data > div');
+      //selection of modules for processing
       const listHiddenModule = document.querySelectorAll('.wrap-data .widget');
+      //hidden and full width
       if(!target.classList.contains('close')) {
         //hidden elements
         listHiddenModule.forEach((item) => {
@@ -35,6 +36,4 @@ function initEventsDOM() {
       }
     })
   });
-
-
 }

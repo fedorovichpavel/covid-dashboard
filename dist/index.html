@@ -19,148 +19,144 @@
 <link href="./src/style.css" rel="stylesheet"></head>
 
 <body>
+    <div class="wrap">
+        <!-- HEADER -->
+        <header>
+            <div class="logo">
+                <h1><span>COVID</span> - 2020</h1>
+            </div>
+            <div class="update-date">
+                <p><span class="title-update">Last update:</span>
+                    <span id="dd"></span>/<span id="mm"></span>/<span id="yy"></span>
+                    <span id="hours"></span>:<span id="minutes"></span>
+                </p>
+            </div>
+        </header>
+        <!-- CONTENT DATA -->
+        <div class="wrap-data">
+            <!-- LEFT COL -->
+            <div class="col-left">
+                <div class="col-left-top">
+                  <div class="col-top-left">
+                    <div class="widget global">
+                        <h3>Global for the world</h3>
+                        <p class="note">(absolute values)</p>
+                        <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                        <div class="data-cases">
+                            <h4>Total Confirmed</h4>
+                            <p></p>
+                        </div>
+                        <div class="data-recovered">
+                            <h4>Total Recovered</h4>
+                            <p></p>
+                        </div>
+                        <div class="data-deaths">
+                            <h4>Total Deaths</h4>
+                            <p></p>
+                        </div>
+                        <div class="toggle">
+                            <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
+                            <button class="icon-menu button-global" title="global"><i class="material-icons">sick</i></button>
+                            <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
+                        </div>
+                    </div>
+                  </div>
+                    <!-- CENTER COL -->
+                    <div class="col-center">
+                        <div class="widget map">
+                            <h3>Map</h3>
+                            <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                            <div id='map' class='map'></div>
+                            <div class="toggle">
+                                <button class="icon-menu map-prev"><i class="material-icons">arrow_left</i></button>
+                                <div class="map-legend" style="border: 1px solid red; width: 400px; margin-right: 10px;"></div>
+                                <button class="icon-menu map-next"><i class="material-icons">arrow_right</i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end col center-->
+                </div>
+                <!--end col top-->
 
-	<div class="wrap">
-		<!-- HEADER -->
-		<header>
-			<div class="logo">
-				<h1><span>COVID</span> - 2020</h1>
-			</div>
-			<div class="update-date">
-				<p><span class="title-update">Last update:</span>
-					<span id="dd"></span>/<span id="mm"></span>/<span id="yy"></span>
-					<span id="hours"></span>:<span id="minutes"></span>
-				</p>
-			</div>
-		</header>
-		<!-- CONTENT DATA -->
-		<div class="wrap-data">
-			<!-- LEFT COL -->
-			<div class="col-left">
-				<div class="col-left-top">
-					<div class="col-top-left">
-						<div class="widget global">
-							<!-- <div class="global-bg"> -->
-							<h3>Global for the world</h3>
-							<p class="note">(absolute values)</p>
-							<button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-							<!-- <div class="toggle">
-                                <button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
-                                <button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
-                            </div> -->
-							<div class="data-cases">
-								<h4>Total Confirmed</h4>
-								<p>7</p>
-							</div>
-							<div class="data-recovered">
-								<h4>Total Recovered</h4>
-								<p>4</p>
-							</div>
-							<div class="data-deaths">
-								<h4>Total Deaths</h4>
-								<p>1</p>
-							</div>
-							<div class="toggle">
-								<button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
-								<button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
-							</div>
-							<!-- </div> -->
-						</div>
-					</div>
-					<!-- CENTER COL -->
-					<div class="col-center">
-						<div class="widget map">
-							<h3>Map</h3>
-							<button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-							<div id='map' class='map'></div>
-							<div class="toggle">
-								<button class="icon-menu map-prev"><i class="material-icons">arrow_left</i></button>
-								<div class="map-legend" style="border: 1px solid red; width: 400px; margin-right: 10px;"></div>
-								<button class="icon-menu map-next"><i class="material-icons">arrow_right</i></button>
-							</div>
-						</div>
-					</div>
-					<!--end col center-->
-				</div>
-				<!--end col top-->
-
-				<div class="col-left-bottom">
-					<div onclick="chartIt()" class="widget module-chart">
-						<button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-						<div class="statistics">
-							<div class="last__report">
-								<div class="country">
-									<div class="name">Loading...</div>
-									<div class="find__country"></div>
-									<div class="change__icon">&#9850;</div>
-									<div class="pick__country hide">
-										<div class="search">
-											<input type="text" id="search__country" placeholder="Search For Country...">
-											<img class="close" src="src/assets/img/close.svg" alt="closeImg">
-										</div>
-										<div class="country-list">
-										</div>
-									</div>
-								</div>
-								<div class="total__cases">
-									<div class="title">Total Cases</div>
-									<div class="value">0</div>
-									<div class="new-value">+0</div>
-								</div>
-								<div class="recovered">
-									<div class="title">Recovered</div>
-									<div class="value">0</div>
-									<div class="new-value">+0</div>
-								</div>
-								<div class="deaths">
-									<div class="title">Deaths</div>
-									<div class="value">0</div>
-									<div class="new-value">+0</div>
-								</div>
-							</div>
-							<canvas class="chart" id="chart"></canvas>
-						</div>
-					</div>
-				</div>
-				<!--end col bottom-->
-			</div>
-			<!--end col left-->
-			<!-- RIGHT COL -->
-			<div class="col-right">
-				<div class="widget">
-					<h3>Countries</h3>
-					<button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
-					<div class="toggle-country"><input type="text"></div>
-					<ul class="countries">
-					</ul>
-					<div class="toggle-data-country">
-						<button class="icon-menu prev"><i class="material-icons">arrow_left</i></button>
-						<span class="title-toggle">global by country</span>
-						<button class="icon-menu next"><i class="material-icons">arrow_right</i></button>
-					</div>
-				</div>
-			</div>
-			<!--end col right-->
-		</div>
-		<!-- FOOTER -->
-		<footer>
-			<ul class="links">
-				<li><a href="https://github.com/mikalai-hurinovich" target="_blank">Mikalai Hurinovich</a></li>
-				<li><a href="https://github.com/fedorovichpavel" target="_blank">Pavel Fedorovich</a></li>
-				<li><a href="https://github.com/mig-marina" target="_blank">Maryna Migacheva</a></li>
-				<li>
-					<p>
-						<a href="https://rs.school/js/" target="_blank"><img src="./src/assets/img/rs_school_js.svg"
-								alt="rs school"></a>
-					</p>
-				</li>
-				<li> - 2020 - </li>
-			</ul>
-		</footer>
-	</div>
-	<script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
-	<script src="src/assets/js/countries.js"></script>
-	<script src="src/assets/js/script.js"></script>
+                <div class="col-left-bottom">
+                    <div class="widget module-chart">
+                        <h3>Schedule</h3>
+                        <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                        <div class="statistics">
+                            <div class="last__report">
+                                <div class="country">
+                                    <div class="name">Loading...</div>
+                                    <div class="find__country">(find)</div>
+                                    <div class="pick__country hide">
+                                        <div class="search">
+                                            <input type="text" id="search__country" placeholder="Search For Country...">
+                                            <img class="close" src="src/assets/img/close.svg" alt="closeImg">
+                                        </div>
+                                        <div class="country-list">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="total__cases">
+                                    <div class="title">Total Cases</div>
+                                    <div class="value">0</div>
+                                    <div class="new-value">+0</div>
+                                </div>
+                                <div class="recovered">
+                                    <div class="title">Recovered</div>
+                                    <div class="value">0</div>
+                                    <div class="new-value">+0</div>
+                                </div>
+                                <div class="deaths">
+                                    <div class="title">Deaths</div>
+                                    <div class="value">0</div>
+                                    <div class="new-value">+0</div>
+                                </div>
+                            </div>
+                            <canvas id="chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!--end col bottom-->
+            </div>
+            <!--end col left-->
+            <!-- RIGHT COL -->
+            <div class="col-right">
+                <div class="widget">
+                    <h3>Countries</h3>
+                    <button class="icon-menu open"><i class="material-icons">zoom_out_map</i></button>
+                    <div class="toggle-country">
+                      <input type="text" name="country" placeholder="enter country">
+                      <button class="search-country"><i class="material-icons">search</i></button>
+                    </div>
+                    <ul class="countries">
+                    </ul>
+                    <div class="toggle-data-country">
+                        <button class="icon-menu prev-data"><i class="material-icons">arrow_left</i></button>
+                        <span class="title-toggle">global by country confirmed</span>
+                        <button class="icon-menu next-data"><i class="material-icons">arrow_right</i></button>
+                    </div>
+                </div>
+            </div>
+            <!--end col right-->
+        </div>
+        <!-- FOOTER -->
+        <footer>
+            <ul class="links">
+                <li><a href="https://github.com/mikalai-hurinovich" target="_blank">Mikalai Hurinovich</a></li>
+                <li><a href="https://github.com/fedorovichpavel" target="_blank">Pavel Fedorovich</a></li>
+                <li><a href="https://github.com/mig-marina" target="_blank">Maryna Migacheva</a></li>
+                <li>
+                    <p>
+                        <a href="https://rs.school/js/" target="_blank"><img src="./src/assets/img/rs_school_js.svg" alt="rs school"></a>
+                    </p>
+                </li>
+                <li> - 2020 - </li>
+            </ul>
+        </footer>
+    </div>
+    <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+    <script src="src/assets/js/countries.js"></script>
+    <script src="src/assets/js/script.js"></script>
 <script src="script.js"></script></body>
 
 </html>
