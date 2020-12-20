@@ -16,24 +16,26 @@ var map = new mapboxgl.Map({
   center: [50, 20],
   scroll: false
 }); //  MAP Fullscreen
-// map.addControl(new mapboxgl.FullscreenControl({ container: document.querySelector('#map') }));
 
+map.addControl(new mapboxgl.FullscreenControl({}));
 var latlongMap = new Map();
 
 _countryCodes.country_codes.forEach(function (e) {
   return latlongMap.set(e.country, [e.longitude, e.latitude]);
 });
 
-var getMarkColor = function getMarkColor(x) {
-  if (x <= 1000) {
+var getMarkColor = function getMarkColor(x, y) {
+  var arr = [[1000, 10000, 100000], [1000, 10000, 100000], [10, 100, 1000]];
+
+  if (x <= arr[y][0]) {
     return '#f4b5b5';
   }
 
-  if (x <= 10000) {
+  if (x <= arr[y][1]) {
     return '#fa8080';
   }
 
-  if (x <= 100000) {
+  if (x <= arr[y][2]) {
     return '#f84848';
   }
 
@@ -49,68 +51,119 @@ function mapFly(name) {
   return map.flyTo({
     center: latlongMap.get(name),
     zoom: 4,
-    essential: true
+    essential: true,
+    speed: 0.7
   });
 }
+/*
+document.querySelector('.icon-menu-zoom').addEventListener('click', () => {
+    map.flyTo({
+        center: [50, 20],
+        zoom: 0.5,
+        essential: true,
+        speed: 1.3
+    });
+});
+*/
+
 
 fetch('https://api.covid19api.com/summary', requestOptions).then(function (response) {
   return response.json();
 }).then(function (data) {
-  data.Countries.forEach(function (country, i) {
-    var TotalConfirmed = country.TotalConfirmed,
-        Country = country.Country;
-    var marker = document.createElement('div');
-    marker.className = 'marker';
-    marker.setAttribute('data-id', i);
-    marker.style.backgroundColor = getMarkColor(TotalConfirmed);
-    new mapboxgl.Marker({
-      color: getMarkColor(TotalConfirmed),
-      element: marker
-    }).setLngLat(latlongMap.get(Country)).addTo(map);
-  });
-  document.querySelector('.map__title').innerHTML = 'Map Global for the World';
-  var mapLegend = document.querySelector('.map-legend');
-  mapLegend.innerHTML = "<div class='map_leg1'></div> < 1000 <div class='map_leg2'></div> < 10 000 <div class='map_leg3'></div> < 100 000<div class='map_leg4'></div> > 100 000";
+  var prev = document.querySelector('.map-prev');
+  var next = document.querySelector('.map-next');
+  var arrTitle = ['Map Total Confirmed', 'Map Total Recovered', 'Map Total Deaths'];
+  var arrType = ['TotalConfirmed', 'TotalRecovered', 'TotalDeaths'];
+  var arrLegNum = [['1000', '10 000', '100 000'], ['1000', '10 000', '100 000'], ['10', '100', '1000']];
+  var arrPopupTitle = ['confirmed', 'recovered', 'deaths'];
 
-  function addPopup(i) {
-    var popup = new mapboxgl.Popup({
-      closeButton: false,
-      closeOnClick: false
+  function selectMapData() {
+    var index = 0;
+    next.addEventListener('click', function () {
+      document.querySelectorAll('.marker').forEach(function (e) {
+        return e.remove();
+      });
+
+      if (index === 2) {
+        index = 0;
+      } else {
+        index++;
+      }
+
+      generateMapData(index);
     });
-    popup.setLngLat(latlongMap.get(data.Countries[i].Country)).setHTML("<strong>".concat(data.Countries[i].Country, "</strong>: confirmed ").concat(data.Countries[i].TotalConfirmed)).addTo(map);
+    prev.addEventListener('click', function () {
+      document.querySelectorAll('.marker').forEach(function (e) {
+        return e.remove();
+      });
+
+      if (index === 0) {
+        index = 2;
+      } else {
+        index--;
+      }
+
+      generateMapData(index);
+    });
   }
 
-  var allMap = document.querySelector('.map');
-  allMap.addEventListener('click', function (event) {
-    var target = event.target;
+  selectMapData();
+  generateMapData(0);
 
-    if (target.className.slice(0, 6) !== 'marker') {
-      return;
-    } else {
-      var id = target.getAttribute('data-id');
-      mapFly(data.Countries[id].Country);
+  function generateMapData(index) {
+    document.querySelector('.map__title').innerHTML = arrTitle[index];
+    var mapLegend = document.querySelector('.map-legend');
+    mapLegend.innerHTML = "<div class='map_leg1'></div> < ".concat(arrLegNum[index][0], " <div class='map_leg2'></div> < ").concat(arrLegNum[index][1], " <div class='map_leg3'></div> < ").concat(arrLegNum[index][2], "<div class='map_leg4'></div> > ").concat(arrLegNum[index][2]);
+    data.Countries.forEach(function (country, i) {
+      var marker = document.createElement('div');
+      marker.className = 'marker';
+      marker.setAttribute('data-id', i);
+      marker.style.backgroundColor = getMarkColor(country[arrType[index]], index);
+      new mapboxgl.Marker({
+        element: marker
+      }).setLngLat(latlongMap.get(country.Country)).addTo(map);
+    });
+
+    function addPopup(i) {
+      var popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      });
+      popup.setLngLat(latlongMap.get(data.Countries[i].Country)).setHTML("<strong>".concat(data.Countries[i].Country, "</strong>: ").concat(arrPopupTitle[index], " ").concat(data.Countries[i][arrType[index]])).addTo(map);
     }
-  });
-  allMap.addEventListener('mouseover', function (event) {
-    var target = event.target;
 
-    if (target.className.slice(0, 6) !== 'marker') {
-      return;
-    } else {
-      var i = target.getAttribute('data-id');
-      addPopup(i);
-    }
-
-    allMap.addEventListener('mouseout', function (event) {
+    var allMap = document.querySelector('.map');
+    allMap.addEventListener('click', function (event) {
       var target = event.target;
 
       if (target.className.slice(0, 6) !== 'marker') {
         return;
       } else {
-        if (document.querySelector('.mapboxgl-popup')) document.querySelector('.mapboxgl-popup').remove();
+        var id = target.getAttribute('data-id');
+        mapFly(data.Countries[id].Country);
       }
     });
-  });
+    allMap.addEventListener('mouseover', function (event) {
+      var target = event.target;
+
+      if (target.className.slice(0, 6) !== 'marker') {
+        return;
+      } else {
+        var i = target.getAttribute('data-id');
+        addPopup(i);
+      }
+
+      allMap.addEventListener('mouseout', function (event) {
+        var target = event.target;
+
+        if (target.className.slice(0, 6) !== 'marker') {
+          return;
+        } else {
+          if (document.querySelector('.mapboxgl-popup')) document.querySelector('.mapboxgl-popup').remove();
+        }
+      });
+    });
+  }
 })["catch"](function () {
   return new Error();
 });
