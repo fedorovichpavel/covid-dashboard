@@ -46,25 +46,63 @@ var requestOptions = {
 fetch('https://api.covid19api.com/summary', requestOptions).then(function (response) {
   return response.json();
 }).then(function (data) {
-  data.Countries.forEach(function (country) {
+  data.Countries.forEach(function (country, i) {
     var TotalConfirmed = country.TotalConfirmed,
         Country = country.Country;
     var marker = document.createElement('div');
     marker.className = 'marker';
+    marker.setAttribute('data-id', i);
     marker.style.backgroundColor = getMarkColor(TotalConfirmed);
     new mapboxgl.Marker({
       color: getMarkColor(TotalConfirmed),
       element: marker
-    }).setLngLat(latlongMap.get(Country)).setPopup(new mapboxgl.Popup({}).setHTML("<strong>".concat(Country, "</strong>: confirmed ").concat(TotalConfirmed))).addTo(map);
+    }).setLngLat(latlongMap.get(Country)).addTo(map);
   });
-  var marker1 = document.querySelectorAll('.marker');
-  marker1.forEach(function (e, i) {
-    return e.addEventListener('click', function () {
-      map.flyTo({
-        center: latlongMap.get(data.Countries[i].Country),
-        zoom: 4,
-        essential: true
-      });
+
+  function mapFly(i) {
+    return map.flyTo({
+      center: latlongMap.get(data.Countries[i].Country),
+      zoom: 4,
+      essential: true
+    });
+  }
+
+  function addPopup(i) {
+    var popup = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false
+    });
+    popup.setLngLat(latlongMap.get(data.Countries[i].Country)).setHTML("<strong>".concat(data.Countries[i].Country, "</strong>: confirmed ").concat(data.Countries[i].TotalConfirmed)).addTo(map);
+  }
+
+  var allMap = document.querySelector('.map');
+  allMap.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.className.slice(0, 6) !== 'marker') {
+      return;
+    } else {
+      mapFly(target.getAttribute('data-id'));
+    }
+  });
+  allMap.addEventListener('mouseover', function (event) {
+    var target = event.target;
+
+    if (target.className.slice(0, 6) !== 'marker') {
+      return;
+    } else {
+      var i = target.getAttribute('data-id');
+      addPopup(i);
+    }
+
+    allMap.addEventListener('mouseout', function (event) {
+      var target = event.target;
+
+      if (target.className.slice(0, 6) !== 'marker') {
+        return;
+      } else {
+        if (document.querySelector('.mapboxgl-popup')) document.querySelector('.mapboxgl-popup').remove();
+      }
     });
   });
 })["catch"](function () {

@@ -37,29 +37,64 @@ fetch('https://api.covid19api.com/summary', requestOptions)
     .then((data) => {
 
 
-        data.Countries.forEach((country) => {
+
+        data.Countries.forEach((country, i) => {
             const { TotalConfirmed, Country } = country;
             const marker = document.createElement('div');
             marker.className = 'marker';
+            marker.setAttribute('data-id', i);
             marker.style.backgroundColor = getMarkColor(TotalConfirmed);
             new mapboxgl.Marker({
                     color: getMarkColor(TotalConfirmed),
                     element: marker
                 })
                 .setLngLat(latlongMap.get(Country))
-                .setPopup(new mapboxgl.Popup({}).setHTML(`<strong>${Country}</strong>: confirmed ${TotalConfirmed}`))
                 .addTo(map);
 
 
+
         });
-        const marker1 = document.querySelectorAll('.marker');
-        marker1.forEach((e, i) => e.addEventListener('click', () => {
-            map.flyTo({
+
+
+        function mapFly(i) {
+            return map.flyTo({
                 center: latlongMap.get(data.Countries[i].Country),
                 zoom: 4,
                 essential: true
             });
-        }));
+        }
+
+        function addPopup(i) {
+            const popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
+            popup.setLngLat(latlongMap.get(data.Countries[i].Country)).setHTML(`<strong>${data.Countries[i].Country}</strong>: confirmed ${data.Countries[i].TotalConfirmed}`).addTo(map);
+        }
+
+        const allMap = document.querySelector('.map');
+
+        allMap.addEventListener('click', function(event) {
+            const target = event.target;
+            if (target.className.slice(0, 6) !== 'marker') { return; } else {
+                mapFly(target.getAttribute('data-id'));
+            }
+        });
+
+        allMap.addEventListener('mouseover', function(event) {
+            const target = event.target;
+            if (target.className.slice(0, 6) !== 'marker') { return; } else {
+                const i = target.getAttribute('data-id');
+                addPopup(i);
+            }
+
+            allMap.addEventListener('mouseout', function(event) {
+                const target = event.target;
+                if (target.className.slice(0, 6) !== 'marker') { return; } else {
+                    if (document.querySelector('.mapboxgl-popup')) document.querySelector('.mapboxgl-popup').remove();
+                }
+            });
+        });
 
         document.querySelector('#map').addEventListener('click', function(event) {
           console.log(event.target);
