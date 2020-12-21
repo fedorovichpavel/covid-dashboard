@@ -1,6 +1,7 @@
 import './assets/js/map';
 import './assets/js/app';
 import './assets/js/main';
+import './assets/js/search';
 import './normalize.css';
 import './style.css';
 

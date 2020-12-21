@@ -75,9 +75,7 @@ async function getGlobalData() {
 }
 
 function addToDOM() {
-    console.log(objDataGlobal.countries);
-
-    function getGlobalDatatoDom() {
+      function getGlobalDatatoDom() {
         // default data
         const countPeopleAll = 7827000000;
         const countPeople = countPeopleAll / 100000;

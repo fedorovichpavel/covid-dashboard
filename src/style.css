@@ -124,6 +124,10 @@ h1 span {
     color: #8B0000;
 }
 
+h1 .logo {
+  margin-right: 10px;
+}
+
 .update-date {
     text-align: right;
 }
@@ -211,7 +215,8 @@ button.icon-menu {
     cursor: pointer;
 }
 
-button.open {
+button.open,
+button.icon-menu-zoom {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -364,10 +369,37 @@ button.search-country {
 }
 
 [name="country"] {
+    position: relative;
     padding-left: 10px;
     letter-spacing: 3px;
 }
 
+.list-search {
+    position: absolute;
+    top: 90px;
+    left: 5px;
+    z-index: 100;
+    width: 96%;
+    height: 200px;
+    overflow-y: scroll;
+    background-color: rgba(27, 27, 27, .9);
+    color: #FFF;
+}
+
+.list-search p {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: padding-left .3s;
+}
+
+.list-search p:hover {
+    padding-left: 15px;
+}
+
+.hide-search {
+  visibility: hidden;
+}
 
 /* STYLES MODULE BOTTOM - CHART */
 
@@ -426,7 +458,6 @@ div.full-width .countries {
 div.full-width .toggle {
     bottom: 20px;
 }
-
 
 /* FOOTER STYLES */
 
