@@ -45,7 +45,7 @@ export function mapFly(name) {
         speed: 0.7
     });
 }
-/*
+
 document.querySelector('.icon-menu-zoom').addEventListener('click', () => {
     map.flyTo({
         center: [50, 20],
@@ -54,7 +54,7 @@ document.querySelector('.icon-menu-zoom').addEventListener('click', () => {
         speed: 1.3
     });
 });
-*/
+
 
 fetch('https://api.covid19api.com/summary', requestOptions)
     .then((response) => response.json())
