@@ -1,80 +1,10 @@
 import { dataCountry } from './dataCountry';
 import { mapFly } from './map';
-//GLOBAL DATA
-let objDataGlobal = {
-    totalConfirmed: 0,
-    totalRecovered: 0,
-    totalDeaths: 0,
-    newConfirmed: 0,
-    newRecovered: 0,
-    newDeaths: 0,
-    countries: []
-}
-let data;
+
 let arrData;
 
-//get data on page load
-addEventListener('load', getData);
-
-//get new data at 00:00 every day
-let updateData = setInterval(function() {
-    const today = new Date();
-    const hour = today.getHours();
-    const min = today.getMinutes();
-    const sec = today.getSeconds();
-    if (hour === 0 && min === 0 && sec === 0) {
-        getGlobalData();
-        // setGlobalDataToLocal();
-    }
-}, 1000);
-
-//get date for last load data
-function getData() {
-    const today = new Date();
-    const day = today.getDate();
-    const month = today.getMonth() + 1;
-    const year = today.getFullYear();
-
-    const hour = today.getHours();
-    const min = today.getMinutes();
-    const sec = today.getSeconds();
-
-    if (day < 10) {
-        document.getElementById('dd').innerText = '0' + day;
-    } else document.getElementById('dd').innerText = day;
-    if (month < 10) {
-        document.getElementById('mm').innerText = '0' + month;
-    } else document.getElementById('mm').innerText = month;
-    document.getElementById('yy').innerText = year;
-    if (hour < 10) {
-        document.getElementById('hours').innerText = '0' + hour;
-    } else document.getElementById('hours').innerText = hour;
-    if (min < 10) {
-        document.getElementById('minutes').innerText = '0' + min;
-    } else document.getElementById('minutes').innerText = min;
-    //get data for API
-    getGlobalData();
-}
-
-async function getGlobalData() {
-    const url = 'https://api.covid19api.com/summary';
-    const res = await fetch(url);
-    data = await res.json();
-    //set data global
-    objDataGlobal.totalConfirmed = data.Global.TotalConfirmed;
-    objDataGlobal.totalRecovered = data.Global.TotalRecovered;
-    objDataGlobal.totalDeaths = data.Global.TotalDeaths;
-    //set data last day
-    objDataGlobal.newConfirmed = data.Global.NewConfirmed;
-    objDataGlobal.newRecovered = data.Global.NewRecovered;
-    objDataGlobal.newDeaths = data.Global.NewDeaths;
-    //set data by country
-    objDataGlobal.countries = data.Countries;
-    //add data to DOM
-    addToDOM();
-}
-
-function addToDOM() {
+export function addToDOM(objDataGlobal) {
+  console.log('in app.js - ', objDataGlobal);
       function getGlobalDatatoDom() {
         // default data
         const countPeopleAll = 7827000000;
