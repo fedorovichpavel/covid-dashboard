@@ -1,3 +1,4 @@
+import './assets/js/data';
 import './assets/js/map';
 import './assets/js/app';
 import './assets/js/main';
