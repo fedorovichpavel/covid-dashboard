@@ -191,14 +191,15 @@ export function addToDOM(objDataGlobal) {
             if (target.tagName === 'LI') {
                 const i = target.getAttribute('data-id');
                 const countryName = target.innerText.slice(0, target.innerText.indexOf('-') - 1);
+
                 viewDataForCountry(i);
                 backlight(target);
                 mapFly(countryName);
-                () => fetchDataCountries(countryName);
 
                 function backlight(item) {
                     if (selected) {
                         selected.classList.remove('backlight');
+
                     }
                     selected = item;
                     selected.classList.add('backlight');

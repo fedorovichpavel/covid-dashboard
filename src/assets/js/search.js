@@ -27,45 +27,13 @@ export function search(listCountriesData) {
         });
 
         let index;
-        /*
-  document.querySelector('.list-search').addEventListener('click', function(event) {
-    if (event.target.tagName === 'P') {
-      value.value = event.target.textContent;
-      hiddenListSearch();
-      let arrListCountries = document.querySelectorAll('.item-country');
-      let z = [];
-      arrListCountries.forEach((item) => z.push(item));
-      // console.log(z);
-      let x = [];
-      arrListCountries.forEach((item) => x.push(item.textContent));
-      let a = x.filter((item) => item.indexOf(value.value) !== -1);
-      // console.log(a);
-
-      // console.log('res search - ', z.filter((item) => item.textContent == a));
-      let test = z.filter((item) => item.textContent == a)[0];
-      let y = z.indexOf(test);
-      // console.log(y);
-      // console.log(arrListCountries[y]);
-      arrListCountries.forEach((item, i) => {
-        if(item.classList.contains('backlight')) {
-          item.classList.remove('backlight');
-        }
-      });
-
-      arrListCountries[y].classList.add('backlight');
-      
-      // console.log(index);
-      // arrListCountries[index].classList.add('backlight');
-    }
-  })
-
-} */
 
         document.querySelector('.list-search').addEventListener('click', function(event) {
             if (event.target.tagName === 'P') {
                 if (event.target == null || document.querySelector(`[data-name="${event.target.innerText}"]`) == null) { return; }
                 document.querySelector(`[data-name="${event.target.innerText}"]`).scrollIntoView({ behavior: "smooth" });
-                document.querySelector(`[data-name="${event.target.innerText}"]`).click();
+                //document.querySelector(`[data-name="${event.target.innerText}"]`).click();
+                document.querySelector(`[data-ccc="${event.target.innerText}"]`).click();
                 hiddenListSearch();
             } else { return }
         });

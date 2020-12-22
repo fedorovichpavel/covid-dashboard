@@ -1,6 +1,5 @@
 import { country_codes } from './country-codes';
 import { fetchDataCountries } from './script';
-
 const mapBox = 'pk.eyJ1IjoiZmVkb3JvdmljaHBhdmVsIiwiYSI6ImNraW5lcTkzMzBtMW8ycm81cTd6N3N3aDIifQ.botvkeUgOwWBdkRdCIwuWg';
 
 mapboxgl.accessToken = mapBox;
@@ -147,6 +146,7 @@ export function addMapOpt(data) {
             const marker = document.createElement('div');
             marker.className = 'marker';
             marker.setAttribute('data-id', i);
+            marker.setAttribute('data-ccc', country.Country);
             marker.style.backgroundColor = getMarkColor(country[arrType[index]], index);
             new mapboxgl.Marker({
                     element: marker
@@ -172,7 +172,7 @@ export function addMapOpt(data) {
                 mapFly(data.Countries[id].Country);
                 document.querySelector(`[data-name="${data.Countries[id].Country}"]`).scrollIntoView({ behavior: "smooth" });
                 document.querySelector(`[data-name="${data.Countries[id].Country}"]`).click();
-                () => fetchDataCountries(data.Countries[id].Country);
+                fetchDataCountries(data.Countries[id].Country);
             }
         });
 
