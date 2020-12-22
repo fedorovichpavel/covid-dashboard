@@ -1,12 +1,13 @@
 import { addToDOM } from './app';
+import { addMapOpt } from './map';
 let objDataGlobal;
 let data;
 
 addEventListener('load', init);
 
 function init() {
-  // //GLOBAL DATA
-  objDataGlobal = {};
+    // //GLOBAL DATA
+    objDataGlobal = {};
 
   //get data on page load
   // addEventListener('load', getData);
@@ -22,16 +23,18 @@ function init() {
       }
   }, 1000);
 
-  //get date for last load data
-  function getData() {
-      const today = new Date();
-      const day = today.getDate();
-      const month = today.getMonth() + 1;
-      const year = today.getFullYear();
 
-      const hour = today.getHours();
-      const min = today.getMinutes();
-      const sec = today.getSeconds();
+    //get date for last load data
+    function getData() {
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth() + 1;
+        const year = today.getFullYear();
+
+        const hour = today.getHours();
+        const min = today.getMinutes();
+        const sec = today.getSeconds();
+
 
       if (day < 10) {
           document.getElementById('dd').innerText = '0' + day;
@@ -69,6 +72,8 @@ function init() {
       //add data to DOM
       addToDOM(objDataGlobal);
       console.log(objDataGlobal);
+    addMapOpt(data);
       //после получения данных в объект objDataGlobal вызываем функции, которые импортнули сюда, но описали в других файлах (см первую строчку и строчку 69) при описании функции указывайте праметр objDataGlobal
   }
 }
+
