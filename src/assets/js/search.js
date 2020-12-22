@@ -47,7 +47,14 @@ function searchCountry() {
       let y = z.indexOf(test);
       // console.log(y);
       // console.log(arrListCountries[y]);
+      arrListCountries.forEach((item, i) => {
+        if(item.classList.contains('backlight')) {
+          item.classList.remove('backlight');
+        }
+      });
+
       arrListCountries[y].classList.add('backlight');
+      
       // console.log(index);
       // arrListCountries[index].classList.add('backlight');
     }

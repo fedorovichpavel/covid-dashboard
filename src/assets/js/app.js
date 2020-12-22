@@ -1,10 +1,26 @@
 import { dataCountry } from './dataCountry';
 import { mapFly } from './map';
 
-let arrData;
+// let arrData;
 
 export function addToDOM(objDataGlobal) {
-  console.log('in app.js - ', objDataGlobal);
+  let arrWork = objDataGlobal.countries;
+  objDataGlobal.countries.forEach((item, i) => {
+    //add people
+    let marker = arrWork[i].Country;
+    let people = dataCountry.filter((item) => item.name === marker)[0].population;
+    item.People = people;
+    //add data by country per 100 thousand population
+    let number = item.People / 100000;
+    item.TCPeople = Math.round(item.TotalConfirmed / number);
+    item.TRPeople = Math.round(item.TotalRecovered / number);
+    item.TDPeople = Math.round(item.TotalDeaths / number);
+    item.lastDayTCPeople = Math.round(item.NewConfirmed / number);
+    item.lastDayTRPeople = Math.round(item.NewRecovered / number);
+    item.lastdayTDPeople = Math.round(item.NewDeaths / number);
+  });
+
+  let arrData;
       function getGlobalDatatoDom() {
         // default data
         const countPeopleAll = 7827000000;
@@ -93,9 +109,9 @@ export function addToDOM(objDataGlobal) {
     };
 
     //start list countries
-    let arrWork = objDataGlobal.countries;
+    // let arrWork = objDataGlobal.countries;
     let startSort = 0;
-    arrWork = objDataGlobal.countries;
+    // arrWork = objDataGlobal.countries;
     arrWork.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
     addNewListCountries(startSort, arrWork);
 
@@ -103,9 +119,6 @@ export function addToDOM(objDataGlobal) {
         let listCountries = document.querySelectorAll('.countries .item-country');
 
         listCountries.forEach((item, i) => {
-            // //sort
-            // let arrWork = objDataGlobal.countries;
-            // arrWork.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
             //add name country
             item.textContent = arrWork[i].Country;
             //add flag
@@ -138,16 +151,35 @@ export function addToDOM(objDataGlobal) {
                 case 5:
                     countForItem.textContent = ' - ' + arrWork[i].NewDeaths.toLocaleString();
                     break;
+                case 6:
+                    countForItem.textContent = ' - ' + arrWork[i].TCPeople.toLocaleString();
+                    break;
+                case 7:
+                    countForItem.textContent = ' - ' + arrWork[i].TRPeople.toLocaleString();
+                    break;
+                case 8:
+                    countForItem.textContent = ' - ' + arrWork[i].TDPeople.toLocaleString();
+                    break;
+                case 9:
+                    countForItem.textContent = ' - ' + arrWork[i].lastDayTCPeople.toLocaleString();
+                    break;
+                case 10:
+                    countForItem.textContent = ' - ' + arrWork[i].lastDayTRPeople.toLocaleString();
+                    break;
+                case 11:
+                    countForItem.textContent = ' - ' + arrWork[i].lastdayTDPeople.toLocaleString();
+                    break;
                 default:
                     countForItem.textContent = ' - ' + arrWork[i].TotalConfirmed.toLocaleString();
             }
-            //countForItem.textContent = ' - ' + arrWork[i].TotalConfirmed.toLocaleString();
         });
     }
 
     //get data by country for click
     let selected;
-    parentCountries.addEventListener('click', function(event) {
+    parentCountries.addEventListener('click', function (event) {
+        clearBack();
+
         let target = event.target;
         while (target !== parentCountries) {
             if (target.tagName === 'LI') {
@@ -173,7 +205,7 @@ export function addToDOM(objDataGlobal) {
 
     function viewDataForCountry(i) {
         let item = objDataGlobal.countries[i];
-
+        console.log('item - ', item);
         //get data by country (population)
         let markerName = objDataGlobal.countries[i].Country;
         const checkedCountry = dataCountry.filter((item) => item.name === markerName)[0].population;
@@ -187,9 +219,13 @@ export function addToDOM(objDataGlobal) {
         const totalDeathsForPeople = Math.round(item.TotalDeaths / countPeople);
 
         //data last day per 100 thousand population
-        const newConfirmedForPeople = Math.round(objDataGlobal.newConfirmed / countPeople);
-        const newRecoveredForPeople = Math.round(objDataGlobal.newRecovered / countPeople);
-        const newDeathsForPeople = Math.round(objDataGlobal.newDeaths / countPeople);
+        // const newConfirmedForPeople = Math.round(objDataGlobal.newConfirmed / countPeople);
+        // const newRecoveredForPeople = Math.round(objDataGlobal.newRecovered / countPeople);
+        // const newDeathsForPeople = Math.round(objDataGlobal.newDeaths / countPeople);
+
+        const newConfirmedForPeople = Math.round(item.NewConfirmed / countPeople);
+        const newRecoveredForPeople = Math.round(item.NewRecovered / countPeople);
+        const newDeathsForPeople = Math.round(item.NewDeaths / countPeople);
 
         arrData = [
             [item.TotalConfirmed, item.TotalRecovered, item.TotalDeaths, `Data for the ${markerName}`, '(absolute values)'],
@@ -215,20 +251,24 @@ export function addToDOM(objDataGlobal) {
         const prev = document.querySelector('.prev-data');
 
         next.addEventListener('click', function() {
-            if (index === 5) {
+            if (index === 11) {
                 index = 0;
             } else {
                 index++;
             }
+            clearBack();
             sortDate(index);
+
         });
         prev.addEventListener('click', function() {
             if (index === 0) {
-                index = 5;
+                index = 11;
             } else {
                 index--;
             }
+            clearBack();
             sortDate(index);
+
         });
     }
 
@@ -236,40 +276,79 @@ export function addToDOM(objDataGlobal) {
     function sortDate(i) {
         let text = document.querySelector('.title-toggle');
         let arrWork;
+        arrWork = objDataGlobal.countries;
         switch (i) {
             case 0:
-                arrWork = objDataGlobal.countries;
+                // arrWork = objDataGlobal.countries;
                 arrWork.sort((a, b) => b.TotalConfirmed - a.TotalConfirmed);
                 text.textContent = 'global by country confirmed';
                 break;
             case 1:
-                arrWork = objDataGlobal.countries;
+                // arrWork = objDataGlobal.countries;
                 arrWork.sort((a, b) => b.TotalRecovered - a.TotalRecovered);
                 text.textContent = 'global by country recovered';
                 break;
             case 2:
-                arrWork = objDataGlobal.countries;
+                // arrWork = objDataGlobal.countries;
                 arrWork.sort((a, b) => b.TotalDeaths - a.TotalDeaths);
                 text.textContent = 'global by country deaths';
                 break;
             case 3:
-                arrWork = objDataGlobal.countries;
+                // arrWork = objDataGlobal.countries;
                 arrWork.sort((a, b) => b.NewConfirmed - a.NewConfirmed);
                 text.textContent = 'last day by country confirmed';
                 break;
             case 4:
-                arrWork = objDataGlobal.countries;
+                // arrWork = objDataGlobal.countries;
                 arrWork.sort((a, b) => b.NewRecovered - a.NewRecovered);
                 text.textContent = 'last day by country recovered';
                 break;
             case 5:
-                arrWork = objDataGlobal.countries;
+                // arrWork = objDataGlobal.countries;
                 arrWork.sort((a, b) => b.NewDeaths - a.NewDeaths);
                 text.textContent = 'last day by country deaths';
+                break;
+            case 6:
+                // arrWork = objDataGlobal.countries;
+                arrWork.sort((a, b) => b.TCPeople - a.TCPeople);
+                text.textContent = 'global by country confirmed (per 100 th)';
+                break;
+            case 7:
+                // arrWork = objDataGlobal.countries;
+                arrWork.sort((a, b) => b.TRPeople - a.TRPeople);
+                text.textContent = 'global by country recovered (per 100 th)';
+                break;
+            case 8:
+                // arrWork = objDataGlobal.countries;
+                arrWork.sort((a, b) => b.TDPeople - a.TDPeople);
+                text.textContent = 'global by country deaths (per 100 th)';
+                break;
+            case 9:
+                // arrWork = objDataGlobal.countries;
+                arrWork.sort((a, b) => b.lastDayTCPeople - a.lastDayTCPeople);
+                text.textContent = 'last day by country confirmed (per 100 th)';
+                break;
+            case 10:
+                // arrWork = objDataGlobal.countries;
+                arrWork.sort((a, b) => b.lastDayTRPeople - a.lastDayTRPeople);
+                text.textContent = 'last day by country recovered (per 100 th)';
+                break;
+            case 11:
+                // arrWork = objDataGlobal.countries;
+                arrWork.sort((a, b) => b.lastdayTDPeople - a.lastdayTDPeople);
+                text.textContent = 'last day by country deaths (per 100 th)';
                 break;
             default:
                 break;
         };
         addNewListCountries(i, arrWork);
+    }
+
+    function clearBack() {
+      document.querySelectorAll('.countries .item-country').forEach((item) => {
+        if(item.classList.contains('backlight')) {
+          item.classList.remove('backlight');
+        }
+      });
     }
 }

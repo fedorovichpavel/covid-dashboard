@@ -9,8 +9,8 @@ function init() {
   objDataGlobal = {};
 
   //get data on page load
-  addEventListener('load', getData);
-
+  // addEventListener('load', getData);
+  getData();
   //get new data at 00:00 every day
   let updateData = setInterval(function() {
       const today = new Date();
@@ -47,7 +47,7 @@ function init() {
           document.getElementById('minutes').innerText = '0' + min;
       } else document.getElementById('minutes').innerText = min;
       //get data for API
-      getGlobalData();
+      // getGlobalData();
   }
 
   getGlobalData();
@@ -55,6 +55,7 @@ function init() {
       const url = 'https://api.covid19api.com/summary';
       const res = await fetch(url);
       data = await res.json();
+      // if (!data) {alert('API is not available now, please try a few minutes later.')};
       //set data global
       objDataGlobal.totalConfirmed = data.Global.TotalConfirmed;
       objDataGlobal.totalRecovered = data.Global.TotalRecovered;
@@ -67,7 +68,7 @@ function init() {
       objDataGlobal.countries = data.Countries;
       //add data to DOM
       addToDOM(objDataGlobal);
-
+      console.log(objDataGlobal);
       //после получения данных в объект objDataGlobal вызываем функции, которые импортнули сюда, но описали в других файлах (см первую строчку и строчку 69) при описании функции указывайте праметр objDataGlobal
   }
 }
