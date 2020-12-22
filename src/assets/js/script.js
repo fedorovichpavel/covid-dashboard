@@ -164,10 +164,9 @@ export function fetchDataCountries(country) {
                 data.forEach((item) => {
                     deathsArr.push(item.Cases);
                 });
-                document.querySelector(`[data-name="${country}"]`).click();
             });
-
         updateStatChart();
+        document.querySelector(`[data-name="${country}"]`).click();
     };
     fetchApi(country);
 }

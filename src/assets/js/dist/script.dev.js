@@ -151,13 +151,13 @@ function fetchDataCountries(country) {
               data.forEach(function (item) {
                 deathsArr.push(item.Cases);
               });
-              document.querySelector("[data-name=\"".concat(country, "\"]")).click();
             }));
 
           case 6:
             updateStatChart();
+            document.querySelector("[data-name=\"".concat(country, "\"]")).click();
 
-          case 7:
+          case 8:
           case "end":
             return _context.stop();
         }
