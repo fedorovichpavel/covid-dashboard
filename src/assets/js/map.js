@@ -1,4 +1,5 @@
 import { country_codes } from './country-codes';
+import { fetchDataCountries } from './script';
 
 const mapBox = 'pk.eyJ1IjoiZmVkb3JvdmljaHBhdmVsIiwiYSI6ImNraW5lcTkzMzBtMW8ycm81cTd6N3N3aDIifQ.botvkeUgOwWBdkRdCIwuWg';
 
@@ -60,8 +61,24 @@ const requestOptions = {
     redirect: 'follow',
 };
 
+export function mapFlyToCenter() {
+    return map.flyTo({
+        center: [50, 20],
+        zoom: 0.5,
+        essential: true,
+        speed: 0.7
+    });
+}
 
 export function mapFly(name) {
+    if (typeof name == 'object') {
+        return map.flyTo({
+            center: name,
+            zoom: 4,
+            essential: true,
+            speed: 0.7
+        });
+    }
     return map.flyTo({
         center: latlongMap.get(name),
         zoom: 4,
@@ -126,7 +143,6 @@ export function addMapOpt(data) {
         document.querySelector('.map_leg2').style.backgroundColor = getMarkColor(1, index, true)[1];
         document.querySelector('.map_leg3').style.backgroundColor = getMarkColor(1, index, true)[2];
         document.querySelector('.map_leg4').style.backgroundColor = getMarkColor(1, index, true)[3];
-
         data.Countries.forEach((country, i) => {
             const marker = document.createElement('div');
             marker.className = 'marker';
@@ -154,6 +170,9 @@ export function addMapOpt(data) {
             if (target.className.slice(0, 6) !== 'marker') { return; } else {
                 const id = target.getAttribute('data-id');
                 mapFly(data.Countries[id].Country);
+                document.querySelector(`[data-name="${data.Countries[id].Country}"]`).scrollIntoView({ behavior: "smooth" });
+                document.querySelector(`[data-name="${data.Countries[id].Country}"]`).click();
+                () => fetchDataCountries(data.Countries[id].Country);
             }
         });
 

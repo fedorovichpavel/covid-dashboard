@@ -1,34 +1,33 @@
-import { dataCountry } from './dataCountry';
-
-let listCountries = [];
-listCountries = dataCountry.map((item) => item.name);
-const searchElem = document.querySelector('[name = "country"]');
-let arr;
-let value = document.querySelector('[name = "country"]');
+export function search(listCountriesData) {
+    let listCountries = listCountriesData.Countries.map(e => e.Country);
+    const searchElem = document.querySelector('[name = "country"]');
+    let arr;
+    let value = document.querySelector('[name = "country"]');
 
 
-//create list from search
-createListCountries();
+    //create list from search
+    createListCountries();
 
-//search
-searchElem.addEventListener('click', searchCountry);
-document.querySelector('.search-country').addEventListener('click', hiddenListSearch);
+    //search
+    searchElem.addEventListener('click', searchCountry);
+    document.querySelector('.search-country').addEventListener('click', hiddenListSearch);
 
-function searchCountry() {
-  document.querySelector('[name = "country"]').value = '';
-  document.querySelector('.list-search').classList.remove('hide-search');
-  searchElem.addEventListener('input', function() {
-    let value = document.querySelector('[name = "country"]').value;
-    arr.forEach(country => {
-      if (country.textContent.startsWith(value)) {
-        country.classList.remove('hide');
-      } else {
-        country.classList.add('hide');
-      }
-    })
-  });
+    function searchCountry() {
+        document.querySelector('[name = "country"]').value = '';
+        document.querySelector('.list-search').classList.remove('hide-search');
+        searchElem.addEventListener('input', function() {
+            let value = document.querySelector('[name = "country"]').value;
+            arr.forEach(country => {
+                if (country.textContent.startsWith(value)) {
+                    country.classList.remove('hide');
+                } else {
+                    country.classList.add('hide');
+                }
+            })
+        });
 
-  let index;
+        let index;
+        /*
   document.querySelector('.list-search').addEventListener('click', function(event) {
     if (event.target.tagName === 'P') {
       value.value = event.target.textContent;
@@ -60,24 +59,37 @@ function searchCountry() {
     }
   })
 
-}
+} */
 
-function createListCountries() {
-  let wrapListSearch = document.createElement('div');
-  wrapListSearch.classList.add('list-search', 'hide-search');
-  document.querySelector('.toggle-country').appendChild(wrapListSearch);
-  listCountries.forEach((item, i) => {
-    let itemList = document.createElement('p');
-    itemList.classList.add('item-list-search');
-    itemList.textContent = item;
-    wrapListSearch.appendChild(itemList);
-  });
-  arr = document.querySelectorAll('.item-list-search');
-}
+        document.querySelector('.list-search').addEventListener('click', function(event) {
+            if (event.target.tagName === 'P') {
+                if (event.target == null || document.querySelector(`[data-name="${event.target.innerText}"]`) == null) { return; }
+                document.querySelector(`[data-name="${event.target.innerText}"]`).scrollIntoView({ behavior: "smooth" });
+                document.querySelector(`[data-name="${event.target.innerText}"]`).click();
+                hiddenListSearch();
+            } else { return }
+        });
 
-function hiddenListSearch() {
-  document.querySelector('.list-search').classList.add('hide-search');
-  arr.forEach((item) => {
-    item.classList.remove('hide');
-  });
+    }
+
+    function createListCountries() {
+        let wrapListSearch = document.createElement('div');
+        wrapListSearch.classList.add('list-search', 'hide-search');
+        document.querySelector('.toggle-country').appendChild(wrapListSearch);
+        listCountries.forEach((item, i) => {
+            let itemList = document.createElement('p');
+            itemList.classList.add('item-list-search');
+            itemList.textContent = item;
+            wrapListSearch.appendChild(itemList);
+        });
+        arr = document.querySelectorAll('.item-list-search');
+    }
+
+    function hiddenListSearch() {
+        document.querySelector('.list-search').classList.add('hide-search');
+        arr.forEach((item) => {
+            item.classList.remove('hide');
+        });
+    }
+
 }

@@ -1,160 +1,172 @@
 @import "https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap";
-
 .hide {
-	display: none;
+    display: none;
 }
 
 .fadeIn {
-	animation: fade 0.7s ease;
+    animation: fade 0.7s ease;
 }
 
 @keyframes fade {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .statistics {
-	background-color: #000;
+    background-color: #000;
 }
 
 .last__report {
-	max-width: 220px;
-	width: 100%;
-	position: absolute;
-	left: 80px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	background-color: #000;
-	color: #fff;
-	padding: 5px 0px;
-	margin-top: 30px;
+    max-width: 220px;
+    width: 100%;
+    position: absolute;
+    left: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    padding: 5px 0px;
+    margin-top: 30px;
 }
 
 .country {
-	display: flex;
-	justify-content: space-evenly;
-	cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
 }
+
 .country .name {
-	font-size: 2em;
-	font-weight: 900;
-	color: rgb(148, 0, 0);
+    font-size: 2em;
+    font-weight: 900;
+    color: rgb(148, 0, 0);
 }
 
 .pick__country {
-	position: relative;
-	margin-top: 50px;
+    position: relative;
 }
 
 .search {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	position: absolute;
-	z-index: 10;
-	width: 450px;
-	height: 40px;
-	background-color: #971616;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: -75px;
+    left: -195px;
+    z-index: 10;
+    width: 450px;
+    height: 40px;
+    background-color: #971616;
 }
+
 .change__icon {
-	padding-left: 8px;
-	font-size: 21px;
+    padding-left: 8px;
+    font-size: 21px;
 }
 
 .total__cases {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .recovered {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .deaths {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
+
 .full-width #chart {
-	height: 70vh;
-	max-height: 70vh;
+    height: 70vh;
+    max-height: 70vh;
 }
+
 div #chart {
-	max-height: 247px;
-	min-height: 200px;
-	padding: 10px 0;
+    max-height: 207px;
+    min-height: 200px;
+    padding: 10px 0;
 }
 
 .search input {
-	width: 300px;
-	height: 30px;
-	background-color: transparent;
-	color: #fff;
-	padding: 10px;
+    width: 300px;
+    height: 30px;
+    background-color: transparent;
+    color: #fff;
+    padding: 10px;
+    border: none;
+}
+
+#search__country:focus {
+    outline: none;
 }
 
 .search input::placeholder {
-	color: #fff;
-	font-size: 1.2em;
+    color: #fff;
+    font-size: 1.2em;
 }
+
 .search__country {
-	background-color: transparent;
+    background-color: transparent;
 }
 
 .search img {
-	width: 30px;
-	cursor: pointer;
-	padding: 0 10px 0 0;
+    width: 30px;
+    cursor: pointer;
+    padding: 0 10px 0 0;
 }
 
 .country-list {
-	position: absolute;
-	display: flex;
-	margin-top: 40px;
-	width: 450px;
-	height: 150px;
-	background-color: rgba(17, 10, 9, 0.801);
-	overflow-y: scroll;
-	z-index: 10;
+    position: absolute;
+    top: -75px;
+    left: -195px;
+    display: flex;
+    margin-top: 40px;
+    width: 450px;
+    height: 225px;
+    background-color: rgba(102, 54, 47, 0.801);
+    overflow-y: scroll;
+    z-index: 10;
 }
 
 .country-list ul li:hover {
-	box-shadow: 0 0 0 1px black;
-	transition: 0.6s;
+    box-shadow: 0 0 0 1px black;
+    transition: 0.6s;
 }
 
 .country-list ul {
-	margin-top: 10px;
-	width: 100%;
+    margin-top: 10px;
+    width: 100%;
 }
 
 .country-list li {
-	cursor: pointer;
-	padding: 10px 0;
-	margin-left: 5px;
+    cursor: pointer;
+    padding: 10px 0;
+    margin-left: 5px;
 }
 
 .country-list::-webkit-scrollbar {
-	background-color: rgba(168, 126, 118, 0.37);
+    background-color: rgba(168, 126, 118, 0.37);
 }
 
 .country-list::-webkit-scrollbar-thumb {
-	background-color: rgba(255, 255, 255, 0.185);
+    background-color: rgba(255, 255, 255, 0.185);
 }
 
 @media (max-width: 620px) {
-	.last__report {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
+    .last__report {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
