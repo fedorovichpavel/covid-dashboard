@@ -4,7 +4,6 @@ const changeIcon = document.querySelector('.change__icon')
 const countryList = document.querySelector('.country-list')
 const hideList = document.querySelector('.close')
 const input = document.getElementById('search__country')
-const widget = document.querySelector('.icon-menu.open')
 
 
 function showAllCountries() {
@@ -252,10 +251,15 @@ function chartIt() {
 	});
 }
 
-
-
 function formatDate(dateString) {
 	let date = new Date(dateString);
 	let month = date.toString().slice(4, 7);
 	return `${date.getDate()} ${month}`;
 }
+
+document.querySelector('.module-chart').addEventListener('click', function (event) {
+	let target = event.target;
+	if (target.tagName == "BUTTON" || target.tagName == 'I') {
+		chartIt();
+	}
+});
