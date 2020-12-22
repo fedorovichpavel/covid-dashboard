@@ -1,27 +1,30 @@
 import { dataCountry } from './dataCountry';
 import { mapFly } from './map';
+import { mapFlyToCenter } from './map';
+import { fetchDataCountries } from './script';
 
 // let arrData;
 
 export function addToDOM(objDataGlobal) {
-  let arrWork = objDataGlobal.countries;
-  objDataGlobal.countries.forEach((item, i) => {
-    //add people
-    let marker = arrWork[i].Country;
-    let people = dataCountry.filter((item) => item.name === marker)[0].population;
-    item.People = people;
-    //add data by country per 100 thousand population
-    let number = item.People / 100000;
-    item.TCPeople = Math.round(item.TotalConfirmed / number);
-    item.TRPeople = Math.round(item.TotalRecovered / number);
-    item.TDPeople = Math.round(item.TotalDeaths / number);
-    item.lastDayTCPeople = Math.round(item.NewConfirmed / number);
-    item.lastDayTRPeople = Math.round(item.NewRecovered / number);
-    item.lastdayTDPeople = Math.round(item.NewDeaths / number);
-  });
+    let arrWork = objDataGlobal.countries;
+    objDataGlobal.countries.forEach((item, i) => {
+        //add people
+        let marker = arrWork[i].Country;
+        let people = dataCountry.filter((item) => item.name === marker)[0].population;
+        item.People = people;
+        //add data by country per 100 thousand population
+        let number = item.People / 100000;
+        item.TCPeople = Math.round(item.TotalConfirmed / number);
+        item.TRPeople = Math.round(item.TotalRecovered / number);
+        item.TDPeople = Math.round(item.TotalDeaths / number);
+        item.lastDayTCPeople = Math.round(item.NewConfirmed / number);
+        item.lastDayTRPeople = Math.round(item.NewRecovered / number);
+        item.lastdayTDPeople = Math.round(item.NewDeaths / number);
+    });
 
-  let arrData;
-      function getGlobalDatatoDom() {
+    let arrData;
+
+    function getGlobalDatatoDom() {
         // default data
         const countPeopleAll = 7827000000;
         const countPeople = countPeopleAll / 100000;
@@ -83,6 +86,7 @@ export function addToDOM(objDataGlobal) {
             getGlobalDatatoDom();
             const startIndex = 0;
             addContentGlobalDate(startIndex);
+            mapFlyToCenter();
             if (document.querySelector('.backlight')) {
                 document.querySelector('.backlight').classList.remove('backlight');
             }
@@ -105,6 +109,7 @@ export function addToDOM(objDataGlobal) {
         let itemList = document.createElement('li');
         itemList.classList.add('item-country');
         itemList.setAttribute('data-id', i);
+
         parentCountries.appendChild(itemList);
     };
 
@@ -121,6 +126,7 @@ export function addToDOM(objDataGlobal) {
         listCountries.forEach((item, i) => {
             //add name country
             item.textContent = arrWork[i].Country;
+            item.setAttribute('data-name', arrWork[i].Country);
             //add flag
             let cMarker = arrWork[i].Country;
             const flag = dataCountry.filter((item) => item.name === cMarker)[0].flag;
@@ -177,7 +183,7 @@ export function addToDOM(objDataGlobal) {
 
     //get data by country for click
     let selected;
-    parentCountries.addEventListener('click', function (event) {
+    parentCountries.addEventListener('click', function(event) {
         clearBack();
 
         let target = event.target;
@@ -188,6 +194,7 @@ export function addToDOM(objDataGlobal) {
                 viewDataForCountry(i);
                 backlight(target);
                 mapFly(countryName);
+                () => fetchDataCountries(countryName);
 
                 function backlight(item) {
                     if (selected) {
@@ -205,7 +212,6 @@ export function addToDOM(objDataGlobal) {
 
     function viewDataForCountry(i) {
         let item = objDataGlobal.countries[i];
-        console.log('item - ', item);
         //get data by country (population)
         let markerName = objDataGlobal.countries[i].Country;
         const checkedCountry = dataCountry.filter((item) => item.name === markerName)[0].population;
@@ -345,10 +351,10 @@ export function addToDOM(objDataGlobal) {
     }
 
     function clearBack() {
-      document.querySelectorAll('.countries .item-country').forEach((item) => {
-        if(item.classList.contains('backlight')) {
-          item.classList.remove('backlight');
-        }
-      });
+        document.querySelectorAll('.countries .item-country').forEach((item) => {
+            if (item.classList.contains('backlight')) {
+                item.classList.remove('backlight');
+            }
+        });
     }
 }

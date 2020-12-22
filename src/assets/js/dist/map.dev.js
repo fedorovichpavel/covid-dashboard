@@ -3,10 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.mapFlyToCenter = mapFlyToCenter;
 exports.mapFly = mapFly;
 exports.addMapOpt = addMapOpt;
 
 var _countryCodes = require("./country-codes");
+
+var _script = require("./script");
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var mapBox = 'pk.eyJ1IjoiZmVkb3JvdmljaHBhdmVsIiwiYSI6ImNraW5lcTkzMzBtMW8ycm81cTd6N3N3aDIifQ.botvkeUgOwWBdkRdCIwuWg';
 mapboxgl.accessToken = mapBox;
@@ -94,7 +99,25 @@ var requestOptions = {
   redirect: 'follow'
 };
 
+function mapFlyToCenter() {
+  return map.flyTo({
+    center: [50, 20],
+    zoom: 0.5,
+    essential: true,
+    speed: 0.7
+  });
+}
+
 function mapFly(name) {
+  if (_typeof(name) == 'object') {
+    return map.flyTo({
+      center: name,
+      zoom: 4,
+      essential: true,
+      speed: 0.7
+    });
+  }
+
   return map.flyTo({
     center: latlongMap.get(name),
     zoom: 4,
@@ -189,6 +212,14 @@ function addMapOpt(data) {
       } else {
         var id = target.getAttribute('data-id');
         mapFly(data.Countries[id].Country);
+        document.querySelector("[data-name=\"".concat(data.Countries[id].Country, "\"]")).scrollIntoView({
+          behavior: "smooth"
+        });
+        document.querySelector("[data-name=\"".concat(data.Countries[id].Country, "\"]")).click();
+
+        (function () {
+          return (0, _script.fetchDataCountries)(data.Countries[id].Country);
+        });
       }
     });
     allMap.addEventListener('mouseover', function (event) {

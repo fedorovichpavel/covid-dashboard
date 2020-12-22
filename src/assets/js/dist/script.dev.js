@@ -1,27 +1,49 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchDataCountries = fetchDataCountries;
+
+var _countries = require("./countries");
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var searchCountry = document.querySelector('.pick__country');
 var nameOfCountry = document.querySelector('.name');
+var changeIcon = document.querySelector('.change__icon');
 var countryList = document.querySelector('.country-list');
 var hideList = document.querySelector('.close');
 var input = document.getElementById('search__country');
 
 function showAllCountries() {
-  var numberOfCountries = country_list.length;
+  var numberOfCountries = _countries.country_list.length;
   var i = 0,
       changeUlListId;
-  country_list.forEach(function (country, index) {
+
+  _countries.country_list.forEach(function (country, index) {
     if (index % Math.ceil(numberOfCountries / listsNumber) == 0) {
       changeUlListId = "list-".concat(i);
       countryList.innerHTML += "<ul id='".concat(changeUlListId, "'></ul>");
       i++;
     }
 
-    document.getElementById("".concat(changeUlListId)).innerHTML += "\n\t\t<li onclick='fetchDataCountries(\"".concat(country.name, "\")' id=\"").concat(country.name, "\">\n\t\t").concat(country.name, "\n\t\t</li>\n\n\t\t");
+    document.getElementById("".concat(changeUlListId)).innerHTML += "\n\t\t<li id=\"".concat(country.name, "\" data-id=\"").concat(country.name, "\">\n\t\t").concat(country.name, "\n\t\t</li>\n\n\t\t");
   });
 }
 
 ;
+document.querySelector('.country-list').addEventListener('click', function (event) {
+  var target = event.target;
+
+  if (target.tagName === 'LI') {
+    fetchDataCountries(target.getAttribute('data-id'));
+    document.querySelector("[data-name=\"".concat(target.getAttribute('data-id'), "\"]")).scrollIntoView({
+      behavior: "smooth"
+    });
+    document.querySelector("[data-name=\"".concat(target.getAttribute('data-id'), "\"]")).click();
+  }
+});
 var listsNumber = 3;
 showAllCountries();
 hideList.addEventListener('click', function () {
@@ -34,12 +56,20 @@ nameOfCountry.addEventListener('click', function () {
   searchCountry.classList.add('fadeIn');
   input.focus();
 });
+changeIcon.addEventListener('click', function () {
+  input.value = '';
+  resetCountryList();
+  searchCountry.classList.toggle('hide');
+  searchCountry.classList.add('fadeIn');
+  input.focus();
+});
 countryList.addEventListener('click', function () {
   searchCountry.classList.toggle('hide');
 });
 input.addEventListener('input', function () {
   var value = input.value.toUpperCase();
-  country_list.forEach(function (country) {
+
+  _countries.country_list.forEach(function (country) {
     if (country.name.toUpperCase().startsWith(value)) {
       document.getElementById(country.name).classList.remove('hide');
     } else {
@@ -49,7 +79,7 @@ input.addEventListener('input', function () {
 });
 
 var resetCountryList = function resetCountryList() {
-  country_list.forEach(function (country) {
+  _countries.country_list.forEach(function (country) {
     document.getElementById(country.name).classList.remove('hide');
   });
 }; // Work with api
@@ -68,10 +98,12 @@ var globalDataArr = [],
     recoveredArr = [],
     deathsArr = [],
     deaths = [],
+    dates = [],
     datesArr = [];
 var codeOfCountry = geoplugin_countryCode(),
     yourCountry;
-country_list.forEach(function (country) {
+
+_countries.country_list.forEach(function (country) {
   if (country.code === codeOfCountry) {
     yourCountry = country.name;
   }
@@ -119,6 +151,7 @@ function fetchDataCountries(country) {
               data.forEach(function (item) {
                 deathsArr.push(item.Cases);
               });
+              document.querySelector("[data-name=\"".concat(country, "\"]")).click();
             }));
 
           case 6:
@@ -149,6 +182,13 @@ function updateStatistics() {
   var newRecoveredCases = totalRecovered - recoveredArr[recoveredArr.length - 2];
   var totalDeaths = deathsArr[deathsArr.length - 1];
   var newDeathsCases = totalDeaths - deathsArr[deathsArr.length - 2];
+
+  if (yourCountry.includes(' ')) {
+    nameOFCountry.style.fontSize = '1.4em';
+  } else {
+    nameOFCountry.style.fontSize = '2em';
+  }
+
   nameOFCountry.innerHTML = yourCountry;
   totalCasesValue.innerHTML = totalCases;
   newCasesValue.innerHTML = "+".concat(newCases);
@@ -171,16 +211,17 @@ function chartIt() {
   }
 
   chart = new Chart(ctx, {
-    type: "bar",
+    type: "line",
     data: {
-      datasets: [{
+      datasets: [_defineProperty({
+        pointBorderWidth: 1,
+        borderWidth: 1,
         label: "Cases",
         data: casesArr,
         fill: false,
         borderColor: "hsl(288, 97%, 71%)",
-        backgroundColor: "hsl(288, 97%, 71%)",
-        borderWidth: 1
-      }, {
+        backgroundColor: "hsl(288, 97%, 71%)"
+      }, "borderWidth", 1), {
         label: "Recovered",
         data: recoveredArr,
         fill: false,
@@ -198,16 +239,36 @@ function chartIt() {
       labels: datesArr
     },
     options: {
+      elements: {
+        line: {
+          tension: 0 // disables bezier curves
+
+        }
+      },
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0
+        }
+      }
     }
   });
-} // FORMAT DATES
-
-
-var allMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Aug", "Sep", "Oct", "Nov", "Dec"];
+}
 
 function formatDate(dateString) {
   var date = new Date(dateString);
-  return "".concat(date.getDate(), " ").concat(allMonths[date.getMonth() - 1]);
+  var month = date.toString().slice(4, 7);
+  return "".concat(date.getDate(), " ").concat(month);
 }
+
+document.querySelector('.module-chart').addEventListener('click', function (event) {
+  var target = event.target;
+
+  if (target.tagName == "BUTTON" || target.tagName == 'I') {
+    document.querySelector('#chart').style.height = '70vh';
+  }
+});
