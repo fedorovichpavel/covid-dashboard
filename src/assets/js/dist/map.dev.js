@@ -189,6 +189,7 @@ function addMapOpt(data) {
       var marker = document.createElement('div');
       marker.className = 'marker';
       marker.setAttribute('data-id', i);
+      marker.setAttribute('data-ccc', country.Country);
       marker.style.backgroundColor = getMarkColor(country[arrType[index]], index);
       new mapboxgl.Marker({
         element: marker
@@ -216,10 +217,7 @@ function addMapOpt(data) {
           behavior: "smooth"
         });
         document.querySelector("[data-name=\"".concat(data.Countries[id].Country, "\"]")).click();
-
-        (function () {
-          return (0, _script.fetchDataCountries)(data.Countries[id].Country);
-        });
+        (0, _script.fetchDataCountries)(data.Countries[id].Country);
       }
     });
     allMap.addEventListener('mouseover', function (event) {
