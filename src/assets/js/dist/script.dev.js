@@ -100,14 +100,7 @@ var globalDataArr = [],
     deaths = [],
     dates = [],
     datesArr = [];
-var codeOfCountry = geoplugin_countryCode(),
-    yourCountry;
-
-_countries.country_list.forEach(function (country) {
-  if (country.code === codeOfCountry) {
-    yourCountry = country.name;
-  }
-});
+var yourCountry;
 
 function fetchDataCountries(country) {
   yourCountry = country;
@@ -168,7 +161,7 @@ function fetchDataCountries(country) {
   fetchApi(country);
 }
 
-fetchDataCountries(yourCountry); // Update Statistics and Chart
+fetchDataCountries('Belarus'); // Update Statistics and Chart
 
 function updateStatChart() {
   updateStatistics();

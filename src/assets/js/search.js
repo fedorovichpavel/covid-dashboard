@@ -32,7 +32,6 @@ export function search(listCountriesData) {
             if (event.target.tagName === 'P') {
                 if (event.target == null || document.querySelector(`[data-name="${event.target.innerText}"]`) == null) { return; }
                 document.querySelector(`[data-name="${event.target.innerText}"]`).scrollIntoView({ behavior: "smooth" });
-                //document.querySelector(`[data-name="${event.target.innerText}"]`).click();
                 document.querySelector(`[data-ccc="${event.target.innerText}"]`).click();
                 hiddenListSearch();
             } else { return }

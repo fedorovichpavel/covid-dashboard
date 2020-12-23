@@ -100,13 +100,8 @@ let globalDataArr = [],
     dates = [],
     datesArr = [];
 
-let codeOfCountry = geoplugin_countryCode(),
-    yourCountry;
-country_list.forEach(country => {
-    if (country.code === codeOfCountry) {
-        yourCountry = country.name;
-    }
-})
+let yourCountry;
+
 
 export function fetchDataCountries(country) {
     yourCountry = country;
@@ -171,7 +166,7 @@ export function fetchDataCountries(country) {
     fetchApi(country);
 }
 
-fetchDataCountries(yourCountry);
+fetchDataCountries('Belarus');
 
 // Update Statistics and Chart
 function updateStatChart() {
